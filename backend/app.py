@@ -1,7 +1,8 @@
-from flask import Flask, request, jsonify
-from flask_cors import CORS
+from database import get_db_connection
+import psycopg2.extras
 from database import get_db_connection
 from gemini import ask_gemini
+
 
 app = Flask(__name__)
 CORS(app)
@@ -28,13 +29,13 @@ def register():
     role = data["role"]
 
     conn = get_db_connection()
-    cursor = conn.cursor()
+    cursor = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
 
     try:
 
         cursor.execute("""
         INSERT INTO users(fullname,email,password,role)
-        VALUES(?,?,?,?)
+        VALUES(%s,%s,%s,%s)
         """, (fullname, email, password, role))
 
         conn.commit()
@@ -63,7 +64,7 @@ def login():
     password = data["password"]
 
     conn = get_db_connection()
-    cursor = conn.cursor()
+    cursor = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
 
     cursor.execute("""
         SELECT id, fullname, email, role
@@ -109,7 +110,7 @@ def add_pet():
     medical_notes = data["medical_notes"]
 
     conn = get_db_connection()
-    cursor = conn.cursor()
+    cursor = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
 
     try:
 
@@ -126,7 +127,7 @@ def add_pet():
             next_vaccination_date,
             medical_notes
         )
-        VALUES(?,?,?,?,?,?,?,?,?,?)
+        VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
         """, (
             user_id,
             pet_name,
@@ -161,7 +162,7 @@ def add_pet():
 def my_pets(user_id):
 
     conn = get_db_connection()
-    cursor = conn.cursor()
+    cursor = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
 
     cursor.execute("""
         SELECT *
@@ -203,13 +204,13 @@ def contact():
     message = data["message"]
 
     conn = get_db_connection()
-    cursor = conn.cursor()
+    cursor = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
 
     try:
 
         cursor.execute("""
             INSERT INTO contacts(name,email,subject,message)
-            VALUES(?,?,?,?)
+            VALUES(%s,%s,%s,%s)
         """,(name,email,subject,message))
 
         conn.commit()
