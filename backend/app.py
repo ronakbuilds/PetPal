@@ -1,11 +1,12 @@
+from flask import Flask, request, jsonify
+from flask_cors import CORS
 from database import get_db_connection
 import psycopg2.extras
-from database import get_db_connection
 from gemini import ask_gemini
-
 
 app = Flask(__name__)
 CORS(app)
+
 
 
 @app.route("/")
