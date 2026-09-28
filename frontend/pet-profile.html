@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pet Profile — PetPal</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="nav-inner">
+        <a href="index.html" class="logo"
+          ><span class="logo-mark">🐾</span> PetPal</a
+        >
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="dashboard.html">Dashboard</a></li>
+          <li><a href="pet-profile.html">Pet Profile</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <div class="nav-cta">
+          <a href="login.html" class="btn btn-ghost">Login</a
+          ><a href="register.html" class="btn btn-primary">Get Started</a
+          ><button class="hamburger" aria-label="Menu"><span></span></button>
+        </div>
+      </div>
+    </nav>
+
+    <header class="hero" style="padding-bottom: 2rem">
+      <div class="container" style="text-align: center">
+        <span class="eyebrow reveal">Pet Profile</span>
+        <h1 class="reveal">
+          Register your
+          <span
+            style="
+              background: var(--gradient-primary);
+              -webkit-background-clip: text;
+              background-clip: text;
+              color: transparent;
+            "
+            >furry friend</span
+          >
+        </h1>
+        <p class="lead reveal" style="margin: 0 auto">
+          Keep all medical and lifestyle info in one secure place.
+        </p>
+      </div>
+    </header>
+
+    <section class="section" style="padding-top: 1rem">
+      <div class="container grid-2" style="align-items: flex-start">
+        <div class="panel reveal">
+          <h3>➕ Register a New Pet</h3>
+          <form id="petForm" style="margin-top: 1rem">
+            <div class="field">
+              <label>Pet Name</label
+              ><input
+                name="pet_name"
+                type="text"
+                required
+                placeholder="e.g. Bruno"
+              />
+            </div>
+            <div class="row">
+              <div class="field">
+                <label>Pet Type</label
+                ><select name="pet_type" required>
+                  <option value="">Select</option>
+                  <option>Dog</option>
+                  <option>Cat</option>
+                  <option>Rabbit</option>
+                  <option>Bird</option>
+                  <option>Other</option>
+                </select>
+              </div>
+              <div class="field">
+                <label>Breed</label
+                ><input name="breed" type="text" placeholder="Labrador" />
+              </div>
+            </div>
+            <div class="row">
+              <div class="field">
+                <label>Gender</label
+                ><select name="gender" required>
+                  <option value="">Select</option>
+                  <option>Male</option>
+                  <option>Female</option>
+                </select>
+              </div>
+              <div class="field">
+                <label>Age (years)</label
+                ><input name="age" type="number" min="0" step="0.1" required />
+              </div>
+            </div>
+            <div class="row">
+              <div class="field">
+                <label>Weight (kg)</label
+                ><input name="weight" type="number" min="0" step="0.1" />
+              </div>
+              <div class="field">
+                <label>Last Vaccination</label
+                ><input name="vaccination_date" type="date" />
+              </div>
+            </div>
+            <div class="field">
+              <label>Next Vaccination</label
+              ><input name="next_vaccination_date" type="date" />
+            </div>
+            <div class="field">
+              <label>Medical Notes</label
+              ><textarea
+                name="medical_notes"
+                placeholder="Allergies, past illnesses, prescriptions…"
+              ></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">
+              Save Pet
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="container footer-grid">
+        <div>
+          <div class="logo" style="color: #fff">
+            <span class="logo-mark">🐾</span> PetPal
+          </div>
+          <p style="margin-top: 1rem; color: #94a3b8">
+            AI-powered smart pet care.
+          </p>
+          <div class="socials">
+            <a href="#">𝕏</a><a href="#">📷</a><a href="#">f</a
+            ><a href="#">▶</a>
+          </div>
+        </div>
+        <div>
+          <h4>Product</h4>
+          <ul>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="pet-profile.html">Pet Profile</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Company</h4>
+          <ul>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Account</h4>
+          <ul>
+            <li><a href="login.html">Login</a></li>
+            <li><a href="register.html">Register</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="container footer-bottom">© 2026 PetPal.</div>
+    </footer>
+
+    <button class="ai-fab" aria-label="Ask PetPal AI">🤖</button>
+    <div class="ai-panel">
+      <div class="ai-header">
+        <div class="avatar">🤖</div>
+        <div>
+          <strong>PetPal AI</strong><small>Multilingual · Always on</small>
+        </div>
+        <button class="close">×</button>
+      </div>
+      <div class="ai-body">
+        <div class="msg bot">
+          I can help you register your pet, explain each field, answer pet-care
+          questions, and remind you about future vaccinations.
+        </div>
+      </div>
+      <div class="ai-suggest">
+        <button>How do I register my pet?</button>
+        <button>When should my pet be vaccinated?</button>
+        <button>Explain this page</button>
+      </div>
+      <div class="ai-input">
+        <input type="text" placeholder="Ask PetPal AI…" /><button>Send</button>
+      </div>
+    </div>
+    <script src="script.js"></script>
+    <script>
+      document
+        .getElementById("petForm")
+        .addEventListener("submit", async function (e) {
+          e.preventDefault();
+
+          const user = JSON.parse(localStorage.getItem("user"));
+
+          if (!user) {
+            alert("Please login first.");
+            window.location.href = "login.html";
+            return;
+          }
+
+          const pet_name = document.querySelector('[name="pet_name"]').value;
+          const pet_type = document.querySelector('[name="pet_type"]').value;
+          const breed = document.querySelector('[name="breed"]').value;
+          const gender = document.querySelector('[name="gender"]').value;
+          const age = document.querySelector('[name="age"]').value;
+          const weight = document.querySelector('[name="weight"]').value;
+          const vaccination_date = document.querySelector(
+            '[name="vaccination_date"]',
+          ).value;
+          const next_vaccination_date = document.querySelector(
+            '[name="next_vaccination_date"]',
+          ).value;
+          const medical_notes = document.querySelector(
+            '[name="medical_notes"]',
+          ).value;
+
+          try {
+            const response = await fetch("http://127.0.0.1:5000/add_pet", {
+              method: "POST",
+
+              headers: {
+                "Content-Type": "application/json",
+              },
+
+              body: JSON.stringify({
+                user_id: user.id,
+                pet_name: pet_name,
+                pet_type: pet_type,
+                breed: breed,
+                gender: gender,
+                age: age,
+                weight: weight,
+                vaccination_date: vaccination_date,
+                next_vaccination_date: next_vaccination_date,
+                medical_notes: medical_notes,
+              }),
+            });
+
+            const data = await response.json();
+
+            if (data.success) {
+              alert("Pet Registered Successfully!");
+
+              document.getElementById("petForm").reset();
+            } else {
+              alert(data.message);
+            }
+          } catch (error) {
+            alert("Unable to connect to backend.");
+          }
+        });
+    </script>
+  </body>
+</html>

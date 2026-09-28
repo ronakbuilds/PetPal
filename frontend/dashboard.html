@@ -1,0 +1,267 @@
+<!doctype html>
+<!-- Frontend only — connect to Flask + MySQL later. -->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard — PetPal</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="nav-inner">
+        <a href="index.html" class="logo"
+          ><span class="logo-mark">🐾</span> PetPal</a
+        >
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="dashboard.html">Dashboard</a></li>
+          <li><a href="pet-profile.html">Pet Profile</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <div class="nav-cta">
+          <a href="login.html" class="btn btn-ghost">Logout</a
+          ><button class="hamburger" aria-label="Menu"><span></span></button>
+        </div>
+      </div>
+    </nav>
+
+    <div class="dash-shell">
+      <aside class="dash-side">
+        <h4>Main</h4>
+        <a href="dashboard.html" class="active">📊 Overview</a>
+        <a href="pet-profile.html">🐾 My Pets</a>
+        <a href="#">💉 Vaccinations</a>
+        <a href="#">🍽️ Feeding</a>
+        <h4>Community</h4>
+        <a href="#">🏡 Adoption</a>
+        <a href="#">🐕 Stray Care</a>
+        <a href="#">🤖 AI Assistant</a>
+        <h4>Account</h4>
+        <a href="#">⚙️ Settings</a>
+        <a href="login.html">↩️ Logout</a>
+      </aside>
+
+      <main class="dash-main">
+        <div class="dash-top">
+          <div>
+            <h1 id="welcomeUser">Welcome 👋</h1>
+            <small>Here's what's happening with your pets today.</small>
+          </div>
+          <div class="avatar avatar-lg">RM</div>
+        </div>
+
+        <div class="grid-4 reveal">
+          <div class="stat-mini">
+            <div class="label">Registered Pets</div>
+            <div class="value" id="petCount">0</div>
+            <div class="delta">+1 this month</div>
+          </div>
+          <div class="stat-mini">
+            <div class="label">Upcoming Vaccinations</div>
+            <div class="value" data-counter="2">0</div>
+            <div class="delta">Next in 3 days</div>
+          </div>
+          <div class="stat-mini">
+            <div class="label">AI Queries</div>
+            <div class="value" data-counter="18">0</div>
+            <div class="delta">Answered Successfully</div>
+          </div>
+          <div class="stat-mini">
+            <div class="label">Adoption Requests</div>
+            <div class="value" data-counter="1">0</div>
+            <div class="delta">1 pending</div>
+          </div>
+        </div>
+
+        <div class="grid-2 reveal" style="margin-top: 1.5rem">
+          <div class="panel">
+            <h3>🔔 Today's Reminder</h3>
+            <ul class="reminder-list" style="margin-top: 1rem">
+              <li class="reminder">
+                <span class="emoji">🐶</span>
+                <div class="info">
+                  <b>Bruno</b><span>Vaccination due in 3 days</span>
+                </div>
+                <span class="tag">Vaccine</span>
+              </li>
+              <li class="reminder warn">
+                <span class="emoji">🐱</span>
+                <div class="info">
+                  <b>Kitty</b><span>Deworming tomorrow</span>
+                </div>
+                <span class="tag">Meds</span>
+              </li>
+              <li class="reminder ok">
+                <span class="emoji">🐕</span>
+                <div class="info">
+                  <b>Sector 5 Stray Dogs</b
+                  ><span>Feeding today at 7:00 PM</span>
+                </div>
+                <span class="tag">Feed</span>
+              </li>
+            </ul>
+          </div>
+          <div
+            class="panel"
+            style="
+              background: var(--gradient-primary);
+              color: #fff;
+              border-color: transparent;
+            "
+          >
+            <h3 style="color: #fff">🤖 Ask your AI Assistant</h3>
+            <div style="color: rgba(255, 255, 255, 0.9); margin-top: 10px">
+              <strong>Try asking:</strong>
+
+              <ul style="margin-top: 10px; padding-left: 20px">
+                <li>Tell me about PetPal</li>
+                <li>Register a new pet</li>
+                <li>When is Bruno's next vaccination?</li>
+                <li>What should I feed my puppy?</li>
+                <li>Explain this dashboard.</li>
+              </ul>
+            </div>
+            <button
+              class="btn btn-accent"
+              onclick="document.querySelector('.ai-fab').click()"
+            >
+              Open Assistant
+            </button>
+            <div style="margin-top: 1.5rem">
+              <h4 style="color: #fff; margin-bottom: 0.5rem">
+                Recent Activities
+              </h4>
+              <ul
+                class="activity-list"
+                style="color: rgba(255, 255, 255, 0.85)"
+              >
+                <li style="border-color: rgba(255, 255, 255, 0.15)">
+                  <b style="color: #fff">Bruno</b> — vaccination scheduled · 2h
+                  ago
+                </li>
+                <li style="border-color: rgba(255, 255, 255, 0.15)">
+                  <b style="color: #fff">Kitty</b> — added medical note ·
+                  yesterday
+                </li>
+                <li style="border-color: rgba(255, 255, 255, 0.15)">
+                  <b style="color: #fff">Sector 5</b> — logged feeding ·
+                  yesterday
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel">
+  <h3>🐾 My Pets</h3>
+
+  <div id="petList" style="margin-top: 1rem">
+  </div>
+
+  <a
+    href="pet-profile.html"
+    class="btn btn-primary"
+    style="margin-top: 1rem"
+  >
+    + Add Pet
+  </a>
+</div>
+          <div class="panel">
+            <h3>🐕 Stray Care Records</h3>
+            <ul class="activity-list" style="margin-top: 1rem">
+              <li><b>Sector 5 — 4 dogs</b> · Vaccinated · Feed 7:00 PM</li>
+              <li><b>Park Lane — 2 cats</b> · Sterilized · Feed 6:30 PM</li>
+              <li><b>Market Rd — 1 dog</b> · Vaccination pending</li>
+              <li><b>Metro Gate — 3 puppies</b> · Under care</li>
+            </ul>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <button class="ai-fab" aria-label="Ask PetPal AI">🤖</button>
+    <div class="ai-panel">
+      <div class="ai-header">
+        <div class="avatar">🤖</div>
+        <div>
+          <strong>PetPal AI</strong><small>Multilingual · Always on</small>
+        </div>
+        <button class="close">×</button>
+      </div>
+      <div class="ai-body">
+        <div class="msg bot">
+          Hi Riya! Ask me about your upcoming reminders or any pet-care
+          question.
+        </div>
+      </div>
+      <div class="ai-suggest">
+        <button>What are my upcoming reminders?</button
+        ><button>When is Bruno's next vaccination?</button
+        ><button>Show today's stray feeding</button>
+      </div>
+      <div class="ai-input">
+        <input type="text" placeholder="Ask PetPal AI…" /><button>Send</button>
+      </div>
+    </div>
+    <script src="script.js"></script>
+    <script>
+
+const user = JSON.parse(localStorage.getItem("user"));
+
+if(!user){
+
+    window.location.href="login.html";
+
+}
+
+document.getElementById("welcomeUser").innerHTML =
+"Welcome back, " + user.fullname + " 👋";
+
+fetch("http://127.0.0.1:5000/my_pets/" + user.id)
+
+.then(res=>res.json())
+
+.then(pets=>{
+
+    document.getElementById("petCount").innerHTML=pets.length;
+
+    const petList=document.getElementById("petList");
+
+    petList.innerHTML="";
+
+    pets.forEach(pet=>{
+
+        petList.innerHTML += `
+        <div class="pet-mini">
+
+            <div class="avatar">🐾</div>
+
+            <div>
+
+                <b>${pet.pet_name}</b>
+
+                <div style="color:var(--text-muted);font-size:0.85rem">
+
+                    ${pet.breed} • ${pet.age} yrs • ${pet.weight} kg
+
+                </div>
+
+            </div>
+
+        </div>
+        `;
+
+    });
+
+});
+
+</script>
+  </body>
+</html>

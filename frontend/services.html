@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Services — PetPal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="nav-inner">
+        <a href="index.html" class="logo"
+          ><span class="logo-mark">🐾</span> PetPal</a
+        >
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="dashboard.html">Dashboard</a></li>
+          <li><a href="pet-profile.html">Pet Profile</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <div class="nav-cta">
+          <a href="login.html" class="btn btn-ghost">Login</a
+          ><a href="register.html" class="btn btn-primary">Get Started</a
+          ><button class="hamburger" aria-label="Menu"><span></span></button>
+        </div>
+      </div>
+    </nav>
+
+    <header class="hero" style="padding-bottom: 2rem">
+      <div class="container" style="text-align: center">
+        <span class="eyebrow reveal">What We Offer</span>
+        <h1 class="reveal">
+          Services built for
+          <span
+            style="
+              background: var(--gradient-primary);
+              -webkit-background-clip: text;
+              background-clip: text;
+              color: transparent;
+            "
+            >every animal lover</span
+          >
+        </h1>
+        <p class="lead reveal" style="margin: 0 auto">
+          Seven powerful modules, one thoughtful platform — powered by AI.
+        </p>
+      </div>
+    </header>
+
+    <section class="section">
+      <div class="container grid-3">
+        <div class="card reveal">
+          <div class="card-icon">📝</div>
+          <h3>Pet Registration</h3>
+          <p>
+            Secure profiles with breed, age, gender, weight and medical history.
+          </p>
+        </div>
+        <div class="card reveal">
+          <div class="card-icon">💉</div>
+          <h3>Vaccination Tracker</h3>
+          <p>Automatic reminders for boosters and deworming.</p>
+        </div>
+        <div class="card reveal">
+          <div class="card-icon">📖</div>
+          <h3>Pet Care Guide</h3>
+          <p>AI-curated tips on nutrition, grooming and behaviour.</p>
+        </div>
+        <div class="card reveal">
+          <div class="card-icon">🏡</div>
+          <h3>Pet Adoption</h3>
+          <p>Browse pets ready for adoption with full details.</p>
+        </div>
+        <div class="card reveal">
+          <div class="card-icon">🔎</div>
+          <h3>Lost &amp; Found</h3>
+          <p>Post and search alerts to reunite pets with families.</p>
+        </div>
+        <div class="card reveal">
+          <div class="card-icon">🐕</div>
+          <h3>Stray Animal Care</h3>
+          <p>
+            Log feeding schedules, sterilization and vaccination for strays.
+          </p>
+        </div>
+        <div
+          class="card reveal"
+          style="
+            grid-column: span 3;
+            background: var(--gradient-primary);
+            color: #fff;
+            border-color: transparent;
+          "
+        >
+          <div class="card-icon" style="background: rgba(255, 255, 255, 0.25)">
+            🤖
+          </div>
+          <h3 style="color: #fff">AI Smart Assistant</h3>
+          <p style="color: rgba(255, 255, 255, 0.9)">
+            Multilingual Gemini-powered assistant: website guide, pet-care
+            expert and personalized reminder engine — all in one.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="cta-banner reveal">
+          <div>
+            <h2>Try the AI Assistant now</h2>
+            <p>Click the floating 🤖 button on any page.</p>
+          </div>
+          <a href="register.html" class="btn btn-accent">Create Account</a>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="container footer-grid">
+        <div>
+          <div class="logo" style="color: #fff">
+            <span class="logo-mark">🐾</span> PetPal
+          </div>
+          <p style="margin-top: 1rem; color: #94a3b8">
+            AI-powered smart pet care.
+          </p>
+          <div class="socials">
+            <a href="#">𝕏</a><a href="#">📷</a><a href="#">f</a
+            ><a href="#">▶</a>
+          </div>
+        </div>
+        <div>
+          <h4>Product</h4>
+          <ul>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="pet-profile.html">Pet Profile</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Company</h4>
+          <ul>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Account</h4>
+          <ul>
+            <li><a href="login.html">Login</a></li>
+            <li><a href="register.html">Register</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="container footer-bottom">© 2026 PetPal.</div>
+    </footer>
+
+    <button class="ai-fab" aria-label="Ask PetPal AI">🤖</button>
+    <div class="ai-panel" role="dialog">
+      <div class="ai-header">
+        <div class="avatar">🤖</div>
+        <div>
+          <strong>PetPal AI</strong><small>Multilingual · Always on</small>
+        </div>
+        <button class="close">×</button>
+      </div>
+      <div class="ai-body">
+        <div class="msg bot">Curious about any service? Ask away!</div>
+      </div>
+      <div class="ai-suggest">
+        <button>How does adoption work?</button
+        ><button>What is Stray Animal Care?</button>
+      </div>
+      <div class="ai-input">
+        <input type="text" placeholder="Ask PetPal AI…" /><button>Send</button>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>

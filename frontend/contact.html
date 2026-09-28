@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact — PetPal</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="nav-inner">
+        <a href="index.html" class="logo"
+          ><span class="logo-mark">🐾</span> PetPal</a
+        >
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="dashboard.html">Dashboard</a></li>
+          <li><a href="pet-profile.html">Pet Profile</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <div class="nav-cta">
+          <a href="login.html" class="btn btn-ghost">Login</a
+          ><a href="register.html" class="btn btn-primary">Get Started</a
+          ><button class="hamburger" aria-label="Menu"><span></span></button>
+        </div>
+      </div>
+    </nav>
+
+    <header class="hero" style="padding-bottom: 2rem">
+      <div class="container" style="text-align: center">
+        <span class="eyebrow reveal">Contact</span>
+        <h1 class="reveal">
+          We'd love to
+          <span
+            style="
+              background: var(--gradient-primary);
+              -webkit-background-clip: text;
+              background-clip: text;
+              color: transparent;
+            "
+            >hear from you</span
+          >
+        </h1>
+        <p class="lead reveal" style="margin: 0 auto">
+          Need help using PetPal? Contact us or ask our AI Assistant for quick guidance.
+        </p>
+      </div>
+    </header>
+
+    <section class="section" style="padding-top: 1rem">
+      <div class="container contact-grid">
+        <div class="panel reveal">
+          <h3>Send us a message</h3>
+          <form id="contactForm" style="margin-top: 1rem">
+            <div class="row">
+              <div class="field">
+                <label>Name</label><input name="name" type="text" required />
+              </div>
+              <div class="field">
+                <label>Email</label><input name="email" type="email" required />
+              </div>
+            </div>
+            <div class="field">
+              <label>Subject</label
+              ><input name="subject" type="text" required />
+            </div>
+            <div class="field">
+              <label>Message</label
+              ><textarea name="message" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">
+              Send Message
+            </button>
+          </form>
+        </div>
+        <div class="panel reveal">
+          <h3>Get in touch</h3>
+          <div class="info-item">
+            <div class="icon">📍</div>
+            <div>
+              <b>Address</b
+              ><span>PetPal HQ, MG Road, Mumbai, Maharashtra 411001</span>
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="icon">📧</div>
+            <div><b>Email</b><span>hello@petpal.ai</span></div>
+          </div>
+          <div class="info-item">
+            <div class="icon">📞</div>
+            <div><b>Phone</b><span>+91 98765 43210</span></div>
+          </div>
+    </section>
+
+    <footer class="footer">
+      <div class="container footer-grid">
+        <div>
+          <div class="logo" style="color: #fff">
+            <span class="logo-mark">🐾</span> PetPal
+          </div>
+          <p style="margin-top: 1rem; color: #94a3b8">
+            AI-powered smart pet care.
+          </p>
+          <div class="socials">
+            <a href="#">𝕏</a><a href="#">📷</a><a href="#">f</a
+            ><a href="#">▶</a>
+          </div>
+        </div>
+        <div>
+          <h4>Product</h4>
+          <ul>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="pet-profile.html">Pet Profile</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Company</h4>
+          <ul>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Account</h4>
+          <ul>
+            <li><a href="login.html">Login</a></li>
+            <li><a href="register.html">Register</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="container footer-bottom">© 2026 PetPal.</div>
+    </footer>
+
+    <button class="ai-fab" aria-label="Ask PetPal AI">🤖</button>
+    <div class="ai-panel">
+      <div class="ai-header">
+        <div class="avatar">🤖</div>
+        <div>
+          <strong>PetPal AI</strong><small>Multilingual · Always on</small>
+        </div>
+        <button class="close">×</button>
+      </div>
+      <div class="ai-body">
+        <div class="msg bot">
+          Hi! I can answer questions about PetPal, explain features, and help you navigate the website.
+        </div>
+      </div>
+      <div class="ai-suggest">
+        <button>How do I contact PetPal?</button>
+        <button>Explain this website</button>
+        <button>What services are available?</button>
+      </div>
+      <div class="ai-input">
+        <input type="text" placeholder="Ask PetPal AI…" /><button>Send</button>
+      </div>
+    </div>
+    <script src="script.js"></script>
+    <script>
+
+document.getElementById("contactForm").addEventListener("submit", async function(e){
+
+    e.preventDefault();
+
+    const name=document.querySelector('[name="name"]').value;
+    const email=document.querySelector('[name="email"]').value;
+    const subject=document.querySelector('[name="subject"]').value;
+    const message=document.querySelector('[name="message"]').value;
+
+    try{
+
+        const response=await fetch("http://127.0.0.1:5000/contact",{
+
+            method:"POST",
+
+            headers:{
+                "Content-Type":"application/json"
+            },
+
+            body:JSON.stringify({
+                name,
+                email,
+                subject,
+                message
+            })
+
+        });
+
+        const data=await response.json();
+
+        if(data.success){
+
+            alert("Message Sent Successfully!");
+
+            document.getElementById("contactForm").reset();
+
+        }else{
+
+            alert(data.message);
+
+        }
+
+    }catch(error){
+
+        alert("Unable to connect to backend.");
+
+    }
+
+});
+
+</script> 
+  </body>
+</html> 

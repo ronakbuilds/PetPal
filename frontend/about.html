@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About — PetPal</title>
+    <meta
+      name="description"
+      content="PetPal's mission, vision and the role of AI in pet care and animal welfare."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="nav-inner">
+        <a href="index.html" class="logo"
+          ><span class="logo-mark">🐾</span> PetPal</a
+        >
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="dashboard.html">Dashboard</a></li>
+          <li><a href="pet-profile.html">Pet Profile</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <div class="nav-cta">
+          <a href="login.html" class="btn btn-ghost">Login</a>
+          <a href="register.html" class="btn btn-primary">Get Started</a>
+          <button class="hamburger" aria-label="Menu"><span></span></button>
+        </div>
+      </div>
+    </nav>
+
+    <header class="hero" style="padding-bottom: 2rem">
+      <div class="container" style="text-align: center">
+        <span class="eyebrow reveal">About PetPal</span>
+        <h1 class="reveal">
+          A kinder world for
+          <span
+            style="
+              background: var(--gradient-primary);
+              -webkit-background-clip: text;
+              background-clip: text;
+              color: transparent;
+            "
+            >every animal</span
+          >
+        </h1>
+        <p class="lead reveal" style="margin: 0 auto">
+          PetPal is an AI-powered platform that helps pet owners and animal
+          lovers manage pet records, vaccination schedules, adoption services,
+          and receive multilingual assistance through an intelligent AI
+          assistant.
+        </p>
+      </div>
+    </header>
+
+    <section class="section">
+      <div class="container">
+        <div class="about-block">
+          <div class="reveal">
+            <span class="eyebrow">Mission</span>
+            <h2>Empower every caregiver with intelligent tools</h2>
+            <p>
+              We want pet parents and stray-animal caregivers everywhere to have
+              access to reliable, multilingual, AI-assisted care — regardless of
+              location, income or experience.
+            </p>
+          </div>
+          <div class="about-visual reveal">🎯</div>
+        </div>
+
+        <div class="about-block">
+          <div class="reveal">
+            <span class="eyebrow">Objectives</span>
+            <h2>What PetPal sets out to do</h2>
+            <ul
+              class="why-list"
+              style="
+                list-style: none;
+                padding: 0;
+                margin-top: 1rem;
+                grid-template-columns: 1fr;
+              "
+            >
+              <li><span class="check">✓</span> Digitize pet health records</li>
+              <li><span class="check">✓</span> Vaccination reminders</li>
+              <li><span class="check">✓</span> Pet adoption & stray care</li>
+              <li><span class="check">✓</span> Multilingual AI Assistant</li>
+            </ul>
+          </div>
+          <div class="about-visual reveal">📋</div>
+        </div>
+
+        <div class="about-block">
+          <div class="reveal">
+            <span class="eyebrow">AI in Pet Care</span>
+            <h2>Why intelligence matters</h2>
+            <p>
+              PetPal AI is a multilingual virtual assistant that helps users
+              understand the website, manage pet records, answer pet-care
+              questions, and provide vaccination reminders in their preferred
+              language.
+            </p>
+            <p>
+              It's a website guide, a pet-care companion and a personalized
+              reminder engine, all in one.
+            </p>
+          </div>
+          <div class="about-visual alt reveal">🤖</div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="container footer-grid">
+        <div>
+          <div class="logo" style="color: #fff">
+            <span class="logo-mark">🐾</span> PetPal
+          </div>
+          <p style="margin-top: 1rem; color: #94a3b8">
+            AI-powered smart pet care &amp; animal welfare portal.
+          </p>
+        </div>
+        <div>
+          <h4>Product</h4>
+          <ul>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="pet-profile.html">Pet Profile</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Company</h4>
+          <ul>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Account</h4>
+          <ul>
+            <li><a href="login.html">Login</a></li>
+            <li><a href="register.html">Register</a></li>
+            <li><a href="#">Privacy</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="container footer-bottom">
+        © 2026 PetPal. Made with 🐾 for animals everywhere.
+      </div>
+    </footer>
+
+    <button class="ai-fab" aria-label="Ask PetPal AI">🤖</button>
+    <div class="ai-panel" role="dialog" aria-label="PetPal AI Assistant">
+      <div class="ai-header">
+        <div class="avatar">🤖</div>
+        <div>
+          <strong>PetPal AI</strong><small>Multilingual · Always on</small>
+        </div>
+        <button class="close" aria-label="Close">×</button>
+      </div>
+      <div class="ai-body">
+        <div class="msg bot">
+          Hi! Ask me anything about PetPal, pet care, or your saved records.
+        </div>
+      </div>
+      <div class="ai-suggest">
+        <button>Tell me about PetPal</button>
+        <button>How do I register my pet?</button>
+        <button>When is my pet's next vaccination?</button>
+      </div>
+      <div class="ai-input">
+        <input type="text" placeholder="Ask PetPal AI…" /><button>Send</button>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register — PetPal</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="nav-inner">
+        <a href="index.html" class="logo"
+          ><span class="logo-mark">🐾</span> PetPal</a
+        >
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="dashboard.html">Dashboard</a></li>
+          <li><a href="pet-profile.html">Pet Profile</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <div class="nav-cta">
+          <a href="login.html" class="btn btn-ghost">Login</a
+          ><a href="register.html" class="btn btn-primary">Get Started</a
+          ><button class="hamburger" aria-label="Menu"><span></span></button>
+        </div>
+      </div>
+    </nav>
+
+    <main class="auth-wrap">
+      <div class="auth-card" style="width: min(520px, 92%)">
+        <h1>Register for PetPal</h1>
+        <p class="sub">
+          Create an account to manage pets and access the AI Assistant.
+        </p>
+        <form id="registerForm">
+          <div class="field">
+            <label>Full Name</label
+            ><input
+              name="name"
+              type="text"
+              required
+              placeholder="Ronak Maheshwari"
+            />
+          </div>
+          <div class="field">
+            <label>Email</label
+            ><input
+              name="email"
+              type="email"
+              required
+              placeholder="you@example.com"
+            />
+          </div>
+          <div class="row">
+            <div class="field">
+              <label>Password</label
+              ><input
+                name="password"
+                type="password"
+                required
+                minlength="6"
+                placeholder="Password"
+              />
+            </div>
+            <div class="field">
+              <label>Confirm</label
+              ><input
+                name="confirm"
+                type="password"
+                required
+                minlength="6"
+                placeholder="Confirm password"
+              />
+            </div>
+          </div>
+          <div class="field">
+            <label>I am a…</label>
+            <select name="role" required>
+              <option value="">Choose one</option>
+              <option value="owner">Pet Owner</option>
+              <option value="lover">Animal Lover</option>
+              <option value="caretaker">Stray Caretaker</option>
+            </select>
+          </div>
+          <div class="remember">
+            <label>
+              <input type="checkbox" required />
+              I agree to the Terms and Conditions
+            </label>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">
+            Create Account
+          </button>
+        </form>
+        <p class="form-note">
+          Already have an account? <a href="login.html">Login</a>
+        </p>
+      </div>
+    </main>
+
+    <button class="ai-fab" aria-label="Ask PetPal AI">🤖</button>
+    <div class="ai-panel">
+      <div class="ai-header">
+        <div class="avatar">🤖</div>
+        <div>
+          <strong>PetPal AI</strong><small>Multilingual · Always on</small>
+        </div>
+        <button class="close">×</button>
+      </div>
+      <div class="ai-body">
+        <div class="msg bot">
+          Welcome! I can help you create your account and explain every feature
+          of PetPal.
+        </div>
+      </div>
+      <div class="ai-suggest">
+        <button>How do I create an account?</button>
+        <button>What can PetPal AI do?</button>
+        <button>Explain PetPal</button>
+      </div>
+      <div class="ai-input">
+        <input type="text" placeholder="Ask PetPal AI…" /><button>Send</button>
+      </div>
+    </div>
+    <script>
+      document
+        .getElementById("registerForm")
+        .addEventListener("submit", async function (e) {
+          e.preventDefault();
+
+          const fullname = document.querySelector('input[name="name"]').value;
+          const email = document.querySelector('input[name="email"]').value;
+          const password = document.querySelector(
+            'input[name="password"]',
+          ).value;
+          const role = document.querySelector('select[name="role"]').value;
+
+          const response = await fetch("http://127.0.0.1:5000/register", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              fullname,
+              email,
+              password,
+              role,
+            }),
+          });
+
+          const data = await response.json();
+
+          if (data.success) {
+            alert("Registration Successful");
+            window.location.href = "login.html";
+          } else {
+            alert(data.message);
+          }
+        });
+    </script>
+
+    <script src="script.js"></script>
+  </body>
+</html>

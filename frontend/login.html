@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login — PetPal</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="nav-inner">
+        <a href="index.html" class="logo"
+          ><span class="logo-mark">🐾</span> PetPal</a
+        >
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="dashboard.html">Dashboard</a></li>
+          <li><a href="pet-profile.html">Pet Profile</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <div class="nav-cta">
+          <a href="login.html" class="btn btn-ghost">Login</a
+          ><a href="register.html" class="btn btn-primary">Get Started</a
+          ><button class="hamburger" aria-label="Menu"><span></span></button>
+        </div>
+      </div>
+    </nav>
+
+    <main class="auth-wrap">
+      <div class="auth-card">
+        <h1>Login to PetPal</h1>
+        <p class="sub">Access your PetPal dashboard and AI assistant.</p>
+        <form id="loginForm">
+          <div class="field">
+            <label for="email">Email</label
+            ><input
+              id="email"
+              name="email"
+              type="email"
+              required
+              placeholder="you@example.com"
+            />
+          </div>
+          <div class="field">
+            <label for="password">Password</label
+            ><input
+              id="password"
+              name="password"
+              type="password"
+              required
+              minlength="6"
+              placeholder="Password"
+            />
+          </div>
+          <div class="remember">
+            <label><input type="checkbox" name="remember" /> Remember me</label>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Login</button>
+        </form>
+        <div class="divider">or continue with</div>
+
+        <button
+          class="btn btn-ghost btn-block"
+          onclick="showToast('Social login coming soon')"
+        >
+          🌐 Google
+        </button>
+        <p class="form-note">
+          New to PetPal? <a href="register.html">Create an account</a>
+        </p>
+      </div>
+    </main>
+
+    <button class="ai-fab" aria-label="Ask PetPal AI">🤖</button>
+    <div class="ai-panel">
+      <div class="ai-header">
+        <div class="avatar">🤖</div>
+        <div>
+          <strong>PetPal AI</strong><small>Multilingual · Always on</small>
+        </div>
+        <button class="close">×</button>
+      </div>
+      <div class="ai-body">
+        <div class="msg bot">
+          Need help? I can guide you through the login process and explain
+          PetPal features.
+        </div>
+      </div>
+      <div class="ai-suggest">
+        <button>How do I login?</button>
+        <button>How do I register?</button>
+        <button>Explain PetPal</button>
+      </div>
+      <div class="ai-input">
+        <input type="text" placeholder="Ask PetPal AI…" /><button>Send</button>
+      </div>
+    </div>
+      <script src="script.js"></script>
+
+      <script>
+        document
+          .getElementById("loginForm")
+          .addEventListener("submit", async function (e) {
+            e.preventDefault();
+
+            const email = document.querySelector('input[name="email"]').value;
+            const password = document.querySelector(
+              'input[name="password"]',
+            ).value;
+
+            try {
+              const response = await fetch("http://127.0.0.1:5000/login", {
+                method: "POST",
+
+                headers: {
+                  "Content-Type": "application/json",
+                },
+
+                body: JSON.stringify({
+                  email,
+                  password,
+                }),
+              });
+
+              const data = await response.json();
+
+              if (data.success) {
+                // Save logged-in user
+                localStorage.setItem("user", JSON.stringify(data.user));
+
+                showToast("Login Successful");
+
+                setTimeout(() => {
+                  window.location.href = "dashboard.html";
+                }, 1000);
+              } else {
+                showToast(data.message);
+              }
+            } catch (error) {
+              showToast("Unable to connect to server.");
+            }
+          });
+      </script>
+    </body>
+  </html>
