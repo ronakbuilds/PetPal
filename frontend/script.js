@@ -155,13 +155,12 @@
   }
 
   async function sendToAI(message) {
-    const response = await fetch("http://127.0.0.1:5000/chat", {
+    // Point directly to your live, green Render backend endpoint
+    const response = await fetch("https://petpal-usd4.onrender.com", {
       method: "POST",
-
       headers: {
         "Content-Type": "application/json",
       },
-
       body: JSON.stringify({
         message: message,
       }),
