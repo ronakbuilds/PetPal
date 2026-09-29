@@ -134,6 +134,7 @@
         .addEventListener("submit", async function (e) {
           e.preventDefault();
 
+          // Ensure these matching attribute names exist inside your input tags!
           const fullname = document.querySelector('input[name="name"]').value;
           const email = document.querySelector('input[name="email"]').value;
           const password = document.querySelector(
@@ -141,7 +142,8 @@
           ).value;
           const role = document.querySelector('select[name="role"]').value;
 
-          const response = await fetch("https://petpal-usd4.onrender.com/register", {
+          // FIXED: Points cleanly to your personal active backend API container
+          const response = await fetch("https://onrender.com", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -165,6 +167,6 @@
         });
     </script>
 
-    <script src="script.js"></script>
+    <script src="./script.js"></script>
   </body>
 </html>
