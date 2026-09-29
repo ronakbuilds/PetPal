@@ -440,3 +440,22 @@ p  { margin: 0 0 1rem; color: var(--text-muted); }
     background:#cbd5e1;
     border-radius:10px;
 }
+/* =========================================================================
+   PetPal Input Layout Boundary Fix 
+   ========================================================================= */
+
+/* Lock every form field control element inside its container box limits */
+.field input, 
+.field select, 
+.field textarea {
+    width: 100% !important;        /* Forces inputs to follow parent card columns */
+    max-width: 100% !important;    /* Prevents the inputs from expanding outward */
+    box-sizing: border-box !important; /* Locks structural padding inside the width dimensions */
+}
+
+/* Ensure the grid wrapper behaves properly across form rows */
+.row {
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;              /* Cleanly clips any structural pixel bleed-out */
+}
