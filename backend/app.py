@@ -154,6 +154,7 @@ def my_pets(user_id):
         WHERE user_id=%s
     """, (user_id,))
 
+
     pets = cursor.fetchall()
     conn.close()
 
