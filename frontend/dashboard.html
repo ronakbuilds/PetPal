@@ -224,7 +224,7 @@ if(!user){
 document.getElementById("welcomeUser").innerHTML =
 "Welcome back, " + user.fullname + " 👋";
 
-fetch("http://127.0.0.1:5000/my_pets/" + user.id)
+fetch("https://petpal-usd4.onrender.com/my_pets/" + user.id)
 
 .then(res=>res.json())
 
