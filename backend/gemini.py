@@ -7,8 +7,8 @@ API_KEY = os.environ.get("GEMINI_API_KEY")
 client = genai.Client(api_key=API_KEY)
 
 MODELS = [
-    "gemini-2.5-flash-8b",  # High-speed micro model (Best for bypassing traffic jams)
-    "gemini-2.5-flash",     # Standard high-speed flash model
+    "gemini-3.8-flash",       # Flagship reasoning & agent workhorse model (2026 standard)
+    "gemini-2.5-flash-8b",    # High-speed fallback micro-model (if available)
 ]
 
 
