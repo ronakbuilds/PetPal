@@ -230,7 +230,7 @@
       }
 
       try {
-        const response = await fetch("https://onrender.com", {
+        const response = await fetch("https://petpal-usd4.onrender.com/register", {
           method: "POST",
           headers: {
             "Content-Type": "application/json"
