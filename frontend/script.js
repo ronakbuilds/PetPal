@@ -191,15 +191,71 @@
     }
   }
 
-  if (sendBtn) sendBtn.addEventListener("click", handleSend);
-  if (input)
+    if (sendBtn) sendBtn.addEventListener("click", handleSend);
+  if (input) {
     input.addEventListener("keydown", (e) => {
       if (e.key === "Enter") handleSend();
     });
-  suggests.forEach((b) =>
+  }
+  suggests.forEach((b) => {
     b.addEventListener("click", () => {
       input.value = b.textContent;
       handleSend();
-    }),
-  );
+    });
+  });
+
+  /* ---------- 7. Complete Live Registration Handler ---------- */
+  const registerForm = document.querySelector("#register-form") || document.querySelector("form");
+  
+  if (registerForm && registerForm.querySelector("input[placeholder*='Name']")) {
+    registerForm.removeAttribute("data-frontend-only");
+    
+    registerForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      
+      const fullnameInput = registerForm.querySelector("input[type='text']") || registerForm.querySelector("input[placeholder*='Name']");
+      const emailInput = registerForm.querySelector("input[type='email']");
+      const passwordInput = registerForm.querySelector("input[type='password']");
+      const roleSelect = registerForm.querySelector("select");
+
+      const fullname = fullnameInput.value.trim();
+      const email = emailInput.value.trim();
+      const password = passwordInput.value;
+      const role = roleSelect ? roleSelect.value : "user";
+
+      const submitBtn = registerForm.querySelector("button[type='submit']") || registerForm.querySelector(".btn-primary");
+      if (submitBtn) {
+          submitBtn.disabled = true;
+          submitBtn.textContent = "Processing...";
+      }
+
+      try {
+        const response = await fetch("https://onrender.com", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ fullname, email, password, role })
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+          window.showToast("Registration Successful! Redirecting...");
+          setTimeout(() => {
+            window.location.href = "login.html"; 
+          }, 2000);
+        } else {
+          window.showToast("Registration failed: " + data.message);
+        }
+      } catch (err) {
+        window.showToast("Could not connect to server. Ensure Render is awake.");
+      } finally {
+        if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.textContent = "Create Account";
+        }
+      }
+    });
+  }
 })();
