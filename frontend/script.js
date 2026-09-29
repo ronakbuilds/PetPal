@@ -155,8 +155,8 @@
   }
 
   async function sendToAI(message) {
-    // Point directly to your live, green Render backend endpoint
-    const response = await fetch("https://onrender.com", {
+    // Explicitly targets your unique active Render web service path
+    const response = await fetch("https://petpal-usd4.onrender.com", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
