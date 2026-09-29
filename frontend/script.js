@@ -156,7 +156,7 @@
 
   async function sendToAI(message) {
     // Explicitly targets your unique active Render web service path
-    const response = await fetch("https://petpal-usd4.onrender.com", {
+    const response = await fetch("https://petpal-usd4.onrender.com/chat", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
