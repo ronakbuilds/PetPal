@@ -8,7 +8,6 @@ app = Flask(__name__)
 CORS(app)
 
 
-
 @app.route("/")
 def home():
     return {
@@ -21,60 +20,60 @@ def home():
 
 @app.route("/register", methods=["POST"])
 def register():
-
     data = request.get_json()
 
-    fullname = data["fullname"]
-    email = data["email"]
-    password = data["password"]
-    role = data["role"]
+    fullname = data.get("fullname", "").strip()
+    email = data.get("email", "").strip()
+    password = data.get("password", "")
+    role = data.get("role", "user")
+
+    if not fullname or not email or not password:
+        return jsonify({"success": False, "message": "Missing required fields"})
 
     conn = get_db_connection()
     cursor = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
 
     try:
-
         cursor.execute("""
-        INSERT INTO users(fullname,email,password,role)
-        VALUES(%s,%s,%s,%s)
+        INSERT INTO users (fullname, email, password, role)
+        VALUES (%s, %s, %s, %s)
         """, (fullname, email, password, role))
 
         conn.commit()
-
         return jsonify({
             "success": True,
             "message": "Registration Successful"
         })
 
     except Exception as e:
-
         return jsonify({
             "success": False,
             "message": str(e)
         })
-
     finally:
         conn.close()
         
+
+# ---------------- Login ---------------- #
+
 @app.route("/login", methods=["POST"])
 def login():
-
     data = request.get_json()
 
-    email = data["email"]
-    password = data["password"]
+    email = data.get("email", "").strip()
+    password = data.get("password", "")
 
     conn = get_db_connection()
     cursor = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
 
+    # FIXED: Changed SQLite '?' placeholders to Postgres '%s' tokens
     cursor.execute("""
         SELECT id, fullname, email, role
         FROM users
-        WHERE email=? AND password=?
+        WHERE email=%s AND password=%s
     """, (email, password))
 
     user = cursor.fetchone()
-
     conn.close()
 
     if user:
@@ -94,9 +93,11 @@ def login():
         "message": "Invalid Email or Password"
     })
     
+
+# ---------------- Add Pet ---------------- #
+
 @app.route("/add_pet", methods=["POST"])
 def add_pet():
-
     data = request.get_json()
 
     user_id = data["user_id"]
@@ -114,71 +115,50 @@ def add_pet():
     cursor = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
 
     try:
-
         cursor.execute("""
         INSERT INTO pets(
-            user_id,
-            pet_name,
-            pet_type,
-            breed,
-            gender,
-            age,
-            weight,
-            vaccination_date,
-            next_vaccination_date,
-            medical_notes
+            user_id, pet_name, pet_type, breed, gender, age, weight,
+            vaccination_date, next_vaccination_date, medical_notes
         )
         VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
         """, (
-            user_id,
-            pet_name,
-            pet_type,
-            breed,
-            gender,
-            age,
-            weight,
-            vaccination_date,
-            next_vaccination_date,
-            medical_notes
+            user_id, pet_name, pet_type, breed, gender, age, weight,
+            vaccination_date, next_vaccination_date, medical_notes
         ))
 
         conn.commit()
-
         return jsonify({
             "success": True,
             "message": "Pet Registered Successfully"
         })
-
     except Exception as e:
-
         return jsonify({
             "success": False,
             "message": str(e)
         })
-
     finally:
         conn.close()
         
+
+# ---------------- My Pets ---------------- #
+
 @app.route("/my_pets/<int:user_id>", methods=["GET"])
 def my_pets(user_id):
-
     conn = get_db_connection()
     cursor = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
 
+    # FIXED: Changed SQLite '?' placeholder to Postgres '%s' token
     cursor.execute("""
-        SELECT *
+        SELECT id, pet_name, pet_type, breed, gender, age, weight, vaccination_date, next_vaccination_date, medical_notes
         FROM pets
-        WHERE user_id=?
+        WHERE user_id=%s
     """, (user_id,))
 
     pets = cursor.fetchall()
-
     conn.close()
 
     result = []
-
     for pet in pets:
-
         result.append({
             "id": pet["id"],
             "pet_name": pet["pet_name"],
@@ -186,7 +166,7 @@ def my_pets(user_id):
             "breed": pet["breed"],
             "gender": pet["gender"],
             "age": pet["age"],
-            "weight": pet["weight"],
+            "weight": float(pet["weight"]) if pet["weight"] else 0,
             "vaccination_date": pet["vaccination_date"],
             "next_vaccination_date": pet["next_vaccination_date"],
             "medical_notes": pet["medical_notes"]
@@ -194,9 +174,11 @@ def my_pets(user_id):
 
     return jsonify(result)
 
+
+# ---------------- Contact Form ---------------- #
+
 @app.route("/contact", methods=["POST"])
 def contact():
-
     data = request.get_json()
 
     name = data["name"]
@@ -208,79 +190,52 @@ def contact():
     cursor = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
 
     try:
-
         cursor.execute("""
             INSERT INTO contacts(name,email,subject,message)
             VALUES(%s,%s,%s,%s)
-        """,(name,email,subject,message))
+        """, (name, email, subject, message))
 
         conn.commit()
-
         return jsonify({
-            "success":True,
-            "message":"Message Sent Successfully"
+            "success": True,
+            "message": "Message Sent Successfully"
         })
-
     except Exception as e:
-
         return jsonify({
-            "success":False,
-            "message":str(e)
+            "success": False,
+            "message": str(e)
         })
-
     finally:
-
         conn.close()
         
+
+# ---------------- AI Chatbot ---------------- #
+
 @app.route("/chat", methods=["POST"])
 def chat():
-
     data = request.get_json()
-
     question = data["message"]
 
     prompt = f"""
-You are PetPal AI.
-
-You are the AI assistant of the PetPal website.
-
-Answer only questions related to:
-
-- Pet care
-- Dogs
-- Cats
-- Rabbits
-- Birds
-- Vaccinations
-- Animal welfare
-- PetPal website
-- Pet registration
-- Dashboard
-- Contact page
-
-Be friendly.
-
-Keep answers under 150 words unless the user asks for more detail.
+You are PetPal AI, the friendly AI assistant of the PetPal website.
+Answer only questions related to pet care, animals, vaccinations, or the PetPal site.
+Keep answers under 150 words.
 
 User Question:
 {question}
 """
-
     try:
-
         answer = ask_gemini(prompt)
-
         return jsonify({
             "success": True,
             "reply": answer
         })
-
     except Exception as e:
-
         return jsonify({
             "success": False,
             "reply": str(e)
         })
+
 
 if __name__ == "__main__":
     app.run(debug=True)
