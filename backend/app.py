@@ -33,25 +33,35 @@ def register():
     conn = get_db_connection()
     cursor = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
 
-    try:
-        cursor.execute("""
-        INSERT INTO users (fullname, email, password, role)
-        VALUES (%s, %s, %s, %s)
-        """, (fullname, email, password, role))
+       try:
+        try:
+            # 1. Try inserting with 'fullname' column name
+            cursor.execute("""
+            INSERT INTO users (fullname, email, password, role)
+            VALUES (%s, %s, %s, %s)
+            """, (fullname, email, password, role))
+            conn.commit()
+        except Exception as db_err:
+            # 2. If it fails, rollback and try inserting with 'name' column name instead
+            conn.rollback()
+            cursor.execute("""
+            INSERT INTO users (name, email, password, role)
+            VALUES (%s, %s, %s, %s)
+            """, (fullname, email, password, role))
+            conn.commit()
 
-        conn.commit()
         return jsonify({
             "success": True,
             "message": "Registration Successful"
         })
 
     except Exception as e:
+        # This will return the exact internal error text instead of freezing the form!
         return jsonify({
             "success": False,
-            "message": str(e)
+            "message": f"Database Error: {str(e)}"
         })
-    finally:
-        conn.close()
+
         
 
 # ---------------- Login ---------------- #
