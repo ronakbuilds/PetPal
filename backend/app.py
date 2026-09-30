@@ -56,13 +56,15 @@ def register():
         })
 
     except Exception as e:
-        # This will return the exact internal error text instead of freezing the form!
         return jsonify({
             "success": False,
             "message": f"Database Error: {str(e)}"
         })
+    finally:
+        # FIXED: Added critical connection shutdown to prevent socket blocking crashes
+        cursor.close()
+        conn.close()
 
-        
 
 # ---------------- Login ---------------- #
 
@@ -76,33 +78,35 @@ def login():
     conn = get_db_connection()
     cursor = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
 
-    # FIXED: Changed SQLite '?' placeholders to Postgres '%s' tokens
-    cursor.execute("""
-        SELECT id, fullname, email, role
-        FROM users
-        WHERE email=%s AND password=%s
-    """, (email, password))
+    try:
+        cursor.execute("""
+            SELECT id, fullname, email, role
+            FROM users
+            WHERE email=%s AND password=%s
+        """, (email, password))
 
-    user = cursor.fetchone()
-    conn.close()
+        user = cursor.fetchone()
+        
+        if user:
+            return jsonify({
+                "success": True,
+                "message": "Login Successful",
+                "user": {
+                    "id": user["id"],
+                    "fullname": user["fullname"],
+                    "email": user["email"],
+                    "role": user["role"]
+                }
+            })
+        return jsonify({"success": False, "message": "Invalid Email or Password"})
 
-    if user:
-        return jsonify({
-            "success": True,
-            "message": "Login Successful",
-            "user": {
-                "id": user["id"],
-                "fullname": user["fullname"],
-                "email": user["email"],
-                "role": user["role"]
-            }
-        })
+    except Exception as e:
+        return jsonify({"success": False, "message": f"Login Error: {str(e)}"})
+    finally:
+        # FIXED: Thread safeties evaluate fully BEFORE shutting connection down
+        cursor.close()
+        conn.close()
 
-    return jsonify({
-        "success": False,
-        "message": "Invalid Email or Password"
-    })
-    
 
 # ---------------- Add Pet ---------------- #
 
@@ -147,8 +151,9 @@ def add_pet():
             "message": str(e)
         })
     finally:
+        cursor.close()
         conn.close()
-        
+
 
 # ---------------- My Pets ---------------- #
 
@@ -157,33 +162,35 @@ def my_pets(user_id):
     conn = get_db_connection()
     cursor = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
 
-    # FIXED: Changed SQLite '?' placeholder to Postgres '%s' token
-    cursor.execute("""
-        SELECT id, pet_name, pet_type, breed, gender, age, weight, vaccination_date, next_vaccination_date, medical_notes
-        FROM pets
-        WHERE user_id=%s
-    """, (user_id,))
+    try:
+        cursor.execute("""
+            SELECT id, pet_name, pet_type, breed, gender, age, weight, vaccination_date, next_vaccination_date, medical_notes
+            FROM pets
+            WHERE user_id=%s
+        """, (user_id,))
 
-
-    pets = cursor.fetchall()
-    conn.close()
-
-    result = []
-    for pet in pets:
-        result.append({
-            "id": pet["id"],
-            "pet_name": pet["pet_name"],
-            "pet_type": pet["pet_type"],
-            "breed": pet["breed"],
-            "gender": pet["gender"],
-            "age": pet["age"],
-            "weight": float(pet["weight"]) if pet["weight"] else 0,
-            "vaccination_date": pet["vaccination_date"],
-            "next_vaccination_date": pet["next_vaccination_date"],
-            "medical_notes": pet["medical_notes"]
-        })
-
-    return jsonify(result)
+        pets = cursor.fetchall()
+        
+        result = []
+        for pet in pets:
+            result.append({
+                "id": pet["id"],
+                "pet_name": pet["pet_name"],
+                "pet_type": pet["pet_type"],
+                "breed": pet["breed"],
+                "gender": pet["gender"],
+                "age": pet["age"],
+                "weight": float(pet["weight"]) if pet["weight"] else 0,
+                "vaccination_date": pet["vaccination_date"],
+                "next_vaccination_date": pet["next_vaccination_date"],
+                "medical_notes": pet["medical_notes"]
+            })
+        return jsonify(result)
+    except Exception as e:
+        return jsonify({"success": False, "message": str(e)})
+    finally:
+        cursor.close()
+        conn.close()
 
 
 # ---------------- Contact Form ---------------- #
@@ -217,8 +224,9 @@ def contact():
             "message": str(e)
         })
     finally:
+        cursor.close()
         conn.close()
-        
+
 
 # ---------------- AI Chatbot ---------------- #
 
