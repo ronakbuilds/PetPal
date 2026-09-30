@@ -7,8 +7,9 @@ API_KEY = os.environ.get("GEMINI_API_KEY")
 client = genai.Client(api_key=API_KEY)
 
 MODELS = [
-    "gemini-3.8-flash",       # Flagship reasoning & agent workhorse model (2026 standard)
-    "gemini-2.5-flash-8b",    # High-speed fallback micro-model (if available)
+    "gemini-3.8-flash",       # Google's absolute newest flagship engine (Fastest queue)
+    "gemini-3.5-flash-lite",  # Ultra-fast, low-traffic workhorse fallback model
+    "gemini-3.5-flash"        # Highly durable alternative stable model
 ]
 
 
