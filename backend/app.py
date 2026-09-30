@@ -33,7 +33,7 @@ def register():
     conn = get_db_connection()
     cursor = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
 
-       try:
+    try:
         try:
             # 1. Try inserting with 'fullname' column name
             cursor.execute("""
