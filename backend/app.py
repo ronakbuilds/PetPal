@@ -114,16 +114,36 @@ def login():
 def add_pet():
     data = request.get_json()
 
-    user_id = data["user_id"]
-    pet_name = data["pet_name"]
-    pet_type = data["pet_type"]
-    breed = data["breed"]
-    gender = data["gender"]
-    age = data["age"]
-    weight = data["weight"]
-    vaccination_date = data["vaccination_date"]
-    next_vaccination_date = data["next_vaccination_date"]
-    medical_notes = data["medical_notes"]
+    try:
+        user_id = data.get("user_id")
+        pet_name = data.get("pet_name", "").strip()
+        pet_type = data.get("pet_type", "Dog").strip()
+        breed = data.get("breed", "").strip()
+        gender = data.get("gender", "Male").strip()
+        medical_notes = data.get("medical_notes", "").strip()
+
+        # SAFE CONVERSION: Converts decimal floats like 1.5 safely to rounded integer to stop database schema errors
+        raw_age = data.get("age", 0)
+        age = int(round(float(raw_age))) if raw_age else 0
+
+        # SAFE CONVERSION: Parses weight float value safely
+        raw_weight = data.get("weight", 0)
+        weight = float(raw_weight) if raw_weight else 0.0
+
+        # SAFE DATES HANDLER: Fallback to None if tracking dates arrive blank from frontend
+        vaccination_date = data.get("vaccination_date")
+        if not vaccination_date or vaccination_date.strip() == "":
+            vaccination_date = None
+
+        next_vaccination_date = data.get("next_vaccination_date")
+        if not next_vaccination_date or next_vaccination_date.strip() == "":
+            next_vaccination_date = None
+
+        if not user_id or not pet_name:
+            return jsonify({"success": False, "message": "User ID and Pet Name are required fields."})
+
+    except Exception as parse_err:
+        return jsonify({"success": False, "message": f"Data Parsing Error: {str(parse_err)}"})
 
     conn = get_db_connection()
     cursor = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
@@ -134,7 +154,7 @@ def add_pet():
             user_id, pet_name, pet_type, breed, gender, age, weight,
             vaccination_date, next_vaccination_date, medical_notes
         )
-        VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
+        VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
         """, (
             user_id, pet_name, pet_type, breed, gender, age, weight,
             vaccination_date, next_vaccination_date, medical_notes
@@ -146,14 +166,15 @@ def add_pet():
             "message": "Pet Registered Successfully"
         })
     except Exception as e:
+        if conn:
+            conn.rollback() # Aborts broken transaction state cleanly to prevent Render 500 loop locks
         return jsonify({
             "success": False,
-            "message": str(e)
+            "message": f"Database Error: {str(e)}"
         })
     finally:
         cursor.close()
         conn.close()
-
 
 # ---------------- My Pets ---------------- #
 
