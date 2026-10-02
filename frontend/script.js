@@ -191,7 +191,7 @@
     }
   }
 
-    if (sendBtn) sendBtn.addEventListener("click", handleSend);
+  if (sendBtn) sendBtn.addEventListener("click", handleSend);
   if (input) {
     input.addEventListener("keydown", (e) => {
       if (e.key === "Enter") handleSend();
@@ -205,17 +205,25 @@
   });
 
   /* ---------- 7. Complete Live Registration Handler ---------- */
-  const registerForm = document.querySelector("#register-form") || document.querySelector("form");
-  
-  if (registerForm && registerForm.querySelector("input[placeholder*='Name']")) {
+  const registerForm =
+    document.querySelector("#register-form") || document.querySelector("form");
+
+  if (
+    registerForm &&
+    registerForm.querySelector("input[placeholder*='Name']")
+  ) {
     registerForm.removeAttribute("data-frontend-only");
-    
+
     registerForm.addEventListener("submit", async (e) => {
       e.preventDefault();
-      
-      const fullnameInput = registerForm.querySelector("input[type='text']") || registerForm.querySelector("input[placeholder*='Name']");
+
+      const fullnameInput =
+        registerForm.querySelector("input[type='text']") ||
+        registerForm.querySelector("input[placeholder*='Name']");
       const emailInput = registerForm.querySelector("input[type='email']");
-      const passwordInput = registerForm.querySelector("input[type='password']");
+      const passwordInput = registerForm.querySelector(
+        "input[type='password']",
+      );
       const roleSelect = registerForm.querySelector("select");
 
       const fullname = fullnameInput.value.trim();
@@ -223,39 +231,151 @@
       const password = passwordInput.value;
       const role = roleSelect ? roleSelect.value : "user";
 
-      const submitBtn = registerForm.querySelector("button[type='submit']") || registerForm.querySelector(".btn-primary");
+      const submitBtn =
+        registerForm.querySelector("button[type='submit']") ||
+        registerForm.querySelector(".btn-primary");
       if (submitBtn) {
-          submitBtn.disabled = true;
-          submitBtn.textContent = "Processing...";
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Processing...";
       }
 
       try {
-        const response = await fetch("https://petpal-usd4.onrender.com/register", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
+        const response = await fetch(
+          "https://petpal-usd4.onrender.com/register",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ fullname, email, password, role }),
           },
-          body: JSON.stringify({ fullname, email, password, role })
-        });
+        );
 
         const data = await response.json();
 
         if (data.success) {
           window.showToast("Registration Successful! Redirecting...");
           setTimeout(() => {
-            window.location.href = "login.html"; 
+            window.location.href = "login.html";
           }, 2000);
         } else {
           window.showToast("Registration failed: " + data.message);
         }
       } catch (err) {
-        window.showToast("Could not connect to server. Ensure Render is awake.");
+        window.showToast(
+          "Could not connect to server. Ensure Render is awake.",
+        );
       } finally {
         if (submitBtn) {
-            submitBtn.disabled = false;
-            submitBtn.textContent = "Create Account";
+          submitBtn.disabled = false;
+          submitBtn.textContent = "Create Account";
         }
       }
     });
   }
 })();
+
+/* ---------- 8. Live Dashboard Data Synchronization ---------- */
+// It checks if the current browser window viewport is on dashboard.html
+if (location.pathname.includes("dashboard.html")) {
+  const initializeDashboard = async () => {
+    // 1. Get logged-in user record metadata from local memory cache
+    const userString = localStorage.getItem("user");
+    if (!userString) {
+      window.location.href = "./login.html";
+      return;
+    }
+    const user = JSON.parse(userString);
+
+    // Update welcome layout strings dynamically
+    const welcomeHeading =
+      document.querySelector("#welcome-user") ||
+      document.querySelector(".welcome-msg h1") ||
+      document.querySelector("h1");
+    if (welcomeHeading)
+      welcomeHeading.textContent = `Welcome Back, ${user.fullname || "User"}!`;
+
+    try {
+      // 2. Query your live active Render cloud service endpoint
+      const response = await fetch(
+        `https://petpal-usd4.onrender.com/my_pets/${user.id}`,
+      );
+      const pets = await response.json();
+
+      // Target counter cells and grid container elements safely
+      const petContainer =
+        document.querySelector("#my-pets-grid") ||
+        document.querySelector(".pets-list") ||
+        document.querySelector(".🐾.My.Pets") ||
+        document.body;
+      const petCountBadge =
+        document.querySelector("[data-counter='pet_count']") ||
+        document.querySelector(".Registered.Pets p") ||
+        document.querySelector("h4 + div");
+
+      if (petCountBadge && Array.isArray(pets)) {
+        petCountBadge.textContent = pets.length;
+      }
+
+      if (petContainer && Array.isArray(pets)) {
+        // Clean out fake hardcoded placeholder rows or alert components
+        const existingCards = petContainer.querySelectorAll(".pet-card, .card");
+        existingCards.forEach((c) => c.remove());
+
+        if (pets.length === 0) {
+          const emptyMsg = document.createElement("p");
+          emptyMsg.className = "empty-state";
+          emptyMsg.style.padding = "1rem";
+          emptyMsg.textContent =
+            "No registered pets found. Click '+ Add Pet' to initialize your database tracking profiles!";
+          petContainer.appendChild(emptyMsg);
+          return;
+        }
+
+        // Loop through real database entries dynamically to build components
+        pets.forEach((pet) => {
+          const card = document.createElement("div");
+          card.className = "pet-card card reveal in";
+          card.style.margin = "1rem 0";
+          card.style.padding = "1.5rem";
+          card.style.background = "white";
+          card.style.borderRadius = "8px";
+          card.innerHTML = `
+                  <h3 style="color: #1e293b; margin-bottom: 0.5rem;">${pet.pet_name} <span style="font-size: 0.9rem; color: #64748b;">(${pet.pet_type})</span></h3>
+                  <p style="color: #475569; font-size: 0.95rem; margin: 0.2rem 0;"><strong>Breed:</strong> ${pet.breed} | <strong>Gender:</strong> ${pet.gender}</p>
+                  <p style="color: #475569; font-size: 0.95rem; margin: 0.2rem 0;"><strong>Weight:</strong> ${pet.weight} kg | <strong>Age:</strong> ${pet.age} years</p>
+                  <div class="vaccine-badge" style="display: inline-block; background: #e0f2fe; color: #0369a1; padding: 0.25rem 0.6rem; border-radius: 4px; font-size: 0.85rem; font-weight: 600; margin-top: 0.5rem;">Next Vaccine: ${pet.next_vaccination_date || "Not Scheduled"}</div>
+                  <p class="notes" style="color: #64748b; font-size: 0.9rem; margin-top: 0.5rem; font-style: italic;">Notes: ${pet.medical_notes || "No custom conditions logged."}</p>
+              `;
+          petContainer.appendChild(card);
+        });
+      }
+    } catch (error) {
+      console.error(
+        "Database pipeline failed to map incoming user pets context:",
+        error,
+      );
+    }
+  };
+
+  initializeDashboard();
+}
+
+  /* ---------- 9. Professional Interactive Logout Process ---------- */
+  const logoutBtn = document.querySelector("#logout-btn-trigger");
+  if (logoutBtn) {
+    logoutBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      
+      const overlay = document.querySelector("#logout-overlay-screen");
+      if (overlay) {
+        overlay.style.display = "flex"; // Activate full screen screen loader overlay layout
+      }
+
+      // Simulate secure session data clearing delay parameters
+      setTimeout(() => {
+        localStorage.removeItem("user"); // Wipe matching auth row data from memory cache
+        window.location.href = "./login.html"; // Safe redirect path to sign-in portal page
+      }, 2000);
+    });
+  }

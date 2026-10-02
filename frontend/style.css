@@ -459,3 +459,13 @@ p  { margin: 0 0 1rem; color: var(--text-muted); }
     max-width: 100%;
     overflow: hidden;              /* Cleanly clips any structural pixel bleed-out */
 }
+
+/* Fix Recent Activities Visibility on Dashboard */
+.recent-activities-container, 
+.activity-item,
+.activity-item span,
+.activity-time {
+    color: #0f172a !important; /* Bold Midnight Dark Slate */
+    font-weight: 600 !important;
+    text-shadow: none !important;
+}
