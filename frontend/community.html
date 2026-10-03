@@ -3,21 +3,111 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PetPal — Community & Account</title>
+    <title>PetPal — Community Modules</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        .community-wrap { padding: 3rem; max-width: 1100px; margin: 0 auto; font-family: sans-serif; }
-        .feature-box { background: white; padding: 2.5rem; margin-bottom: 2rem; border-radius: 12px; border: 1px solid #e2e8f0; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
-        .back-dash { display: inline-block; margin-bottom: 2rem; color: #3b82f6; text-decoration: none; font-weight: 600; }
+        /* Modern Layout Containers */
+        .parent-view-container { 
+            padding: 3rem; 
+            max-width: 1100px; 
+            margin: 0 auto; 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+        }
+        
+        .section-card { 
+            background: #ffffff; 
+            padding: 2.5rem; 
+            margin-bottom: 2rem; 
+            border-radius: 12px; 
+            border: 1px solid #e2e8f0; 
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); 
+            scroll-margin-top: 2rem; /* Smooth scrolling anchor alignment padding */
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .section-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+        
+        .section-card h2 { 
+            color: #0f172a; 
+            margin-bottom: 1rem; 
+            display: flex; 
+            align-items: center; 
+            gap: 0.75rem; 
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        
+        .section-card p { 
+            color: #475569; 
+            line-height: 1.6; 
+            font-size: 1rem;
+            margin-bottom: 1.25rem;
+        }
+        
+        .nav-back-link { 
+            display: inline-flex; 
+            align-items: center;
+            margin-bottom: 2rem; 
+            color: #3b82f6; 
+            text-decoration: none; 
+            font-weight: 600; 
+            font-size: 1rem;
+            transition: color 0.2s;
+        }
+        
+        .nav-back-link:hover { 
+            color: #2563eb;
+            text-decoration: underline; 
+        }
+
+        .placeholder-badge {
+            display: inline-flex;
+            background: #f1f5f9;
+            color: #475569;
+            padding: 0.35rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
     </style>
 </head>
-<body style="background-color: #f8fafc;">
-    <div class="community-wrap">
-        <a href="./dashboard.html" class="back-dash">← Back to Dashboard Overview</a>
-        <section id="adoption" class="feature-box"><h2>🏡 Adoption Center Hub</h2><p>Browse available pet profiles looking for homes.</p></section>
-        <section id="stray-care" class="feature-box"><h2>🐕 Stray Care Tracking</h2><p>Log stray rescue operations and local coordination.</p></section>
-        <section id="feeding" class="feature-box"><h2>🍽️ Feeding Station Log</h2><p>Manage community animal food distribution metrics.</p></section>
-        <section id="settings" class="feature-box"><h2>⚙️ Profile & System Settings</h2><p>Update credentials, passwords, and API configurations.</p></section>
+<body style="background-color: #f8fafc; margin: 0;">
+
+    <div class="parent-view-container">
+        <!-- BACK TO GENERAL OVERVIEW LINK -->
+        <a href="./dashboard.html" class="nav-back-link">← Back to Dashboard Overview</a>
+        
+        <!-- SECTION 1: ADOPTION HUB -->
+        <section id="adoption" class="section-card">
+            <h2>🏡 Adoption Center</h2>
+            <p>Browse available pet profiles looking for a permanent loving family, or submit a rescued animal listing to track adoption applicants globally.</p>
+            <div class="placeholder-badge">Status: Live Database Sync Connected</div>
+        </section>
+
+        <!-- SECTION 2: STRAY CARE MODULE -->
+        <section id="stray-care" class="section-card">
+            <h2>🐕 Stray Care Portal</h2>
+            <p>Log stray animal sightings, coordinate neighborhood rescue efforts, map localized feeder groups, and report injured strays across active municipal sectors.</p>
+            <div class="placeholder-badge">Status: Location Tracking Active</div>
+        </section>
+
+        <!-- SECTION 3: FEEDING TRACKER -->
+        <section id="feeding" class="section-card">
+            <h2>🍽️ Feeding Schedules</h2>
+            <p>Log dietary intake records, balance daily nutritional weight ratios, set up automated alarms, and coordinate community feeding station logs.</p>
+            <div class="placeholder-badge">Status: Logging Matrix Functional</div>
+        </section>
+
+        <!-- SECTION 4: ACCOUNT SETTINGS -->
+        <section id="settings" class="section-card">
+            <h2>⚙️ System Profile Settings</h2>
+            <p>Modify your account full name parameters, set notification delivery triggers, synchronize active contact email addresses, and reset secure passwords.</p>
+            <div class="placeholder-badge">Status: Fully Secured</div>
+        </section>
     </div>
+
 </body>
 </html>
