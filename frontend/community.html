@@ -3,110 +3,247 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PetPal — Community Modules</title>
+    <title>PetPal — Community Workspace Hub</title>
     <link rel="stylesheet" href="style.css">
+    <!-- Premium Google Fonts Link -->
+    <link href="https://googleapis.com" rel="stylesheet">
     <style>
-        /* Modern Layout Containers */
-        .parent-view-container { 
-            padding: 3rem; 
-            max-width: 1100px; 
-            margin: 0 auto; 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
-        
-        .section-card { 
-            background: #ffffff; 
-            padding: 2.5rem; 
-            margin-bottom: 2rem; 
-            border-radius: 12px; 
-            border: 1px solid #e2e8f0; 
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); 
-            scroll-margin-top: 2rem; /* Smooth scrolling anchor alignment padding */
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        body {
+            background-color: #f8fafc;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: #0f172a;
+            -webkit-font-smoothing: antialiased;
         }
+        .app-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem;
+        }
+        /* Top Navigation Header Styling */
+        .top-nav-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 3.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .nav-back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            padding: 0.5rem 1rem;
+            background: #eff6ff;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+        .nav-back-link:hover {
+            background: #dbeafe;
+            transform: translateX(-3px);
+        }
+        .page-title h1 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #0f172a;
+            letter-spacing: -0.5px;
+        }
+        .page-title p {
+            color: #64748b;
+            font-size: 0.95rem;
+            margin-top: 0.25rem;
+        }
+        /* Premium Responsive Cards Grid Layout */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 2rem;
+        }
+        @media (max-width: 768px) {
+            .grid-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        .section-card {
+            background: #ffffff;
+            padding: 2.5rem;
+            border-radius: 16px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 6px -1px rgba(15, 23, 42, 0.02), 0 2px 4px -1px rgba(15, 23, 42, 0.01);
+            scroll-margin-top: 2rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .section-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: transparent;
+            transition: background 0.2s ease;
+        }
+        /* Dynamic Theme Accents per Card Block */
+        #adoption:hover::before { background: #10b981; }
+        #stray-care:hover::before { background: #f59e0b; }
+        #feeding:hover::before { background: #3b82f6; }
+        #settings:hover::before { background: #64748b; }
 
         .section-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(15, 23, 42, 0.06), 0 10px 10px -5px rgba(15, 23, 42, 0.03);
+            border-color: #cbd5e1;
         }
-        
-        .section-card h2 { 
-            color: #0f172a; 
-            margin-bottom: 1rem; 
-            display: flex; 
-            align-items: center; 
-            gap: 0.75rem; 
-            font-size: 1.5rem;
-            font-weight: 600;
-        }
-        
-        .section-card p { 
-            color: #475569; 
-            line-height: 1.6; 
-            font-size: 1rem;
-            margin-bottom: 1.25rem;
-        }
-        
-        .nav-back-link { 
-            display: inline-flex; 
+        .card-header {
+            display: flex;
             align-items: center;
-            margin-bottom: 2rem; 
-            color: #3b82f6; 
-            text-decoration: none; 
-            font-weight: 600; 
-            font-size: 1rem;
-            transition: color 0.2s;
+            gap: 12px;
+            margin-bottom: 1rem;
         }
-        
-        .nav-back-link:hover { 
-            color: #2563eb;
-            text-decoration: underline; 
+        .card-icon {
+            font-size: 1.75rem;
         }
-
-        .placeholder-badge {
-            display: inline-flex;
-            background: #f1f5f9;
+        .section-card h2 {
+            color: #0f172a;
+            font-size: 1.35rem;
+            font-weight: 600;
+            letter-spacing: -0.3px;
+        }
+        .section-card p {
             color: #475569;
-            padding: 0.35rem 0.75rem;
-            border-radius: 6px;
-            font-size: 0.85rem;
-            font-weight: 500;
+            line-height: 1.6;
+            font-size: 0.95rem;
+            margin-bottom: 1.75rem;
+        }
+        /* Neon Micro Status Badges Layout */
+        .status-badge-container {
+            display: flex;
+            align-items: center;
+        }
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 0.4rem 0.85rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.2px;
+        }
+        .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+        /* Dynamic Badge Color Injection Blocks */
+        .badge-success { background: #ecfdf5; color: #047857; }
+        .badge-success .dot { background: #10b981; animation: pulse 2s infinite; }
+        
+        .badge-warning { background: #fffbeb; color: #b45309; }
+        .badge-warning .dot { background: #f59e0b; }
+        
+        .badge-info { background: #f0fdfa; color: #0f766e; }
+        .badge-info .dot { background: #14b8a6; }
+        
+        .badge-secure { background: #f8fafc; color: #475569; border: 1px solid #e2e8f0; }
+        .badge-secure .dot { background: #64748b; }
+
+        @keyframes pulse {
+            0% { transform: scale(0.95); opacity: 0.5; }
+            50% { transform: scale(1.15); opacity: 1; }
+            100% { transform: scale(0.95); opacity: 0.5; }
         }
     </style>
 </head>
-<body style="background-color: #f8fafc; margin: 0;">
+<body>
 
-    <div class="parent-view-container">
-        <!-- BACK TO GENERAL OVERVIEW LINK -->
-        <a href="./dashboard.html" class="nav-back-link">← Back to Dashboard Overview</a>
+    <div class="app-container">
+        <!-- TOP APP BAR -->
+        <header class="top-nav-bar">
+            <a href="./dashboard.html" class="nav-back-link">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                Dashboard Overview
+            </a>
+            <div class="page-title" style="text-align: right;">
+                <h1>Community Hub</h1>
+                <p>Social utilities and workspace portals</p>
+            </div>
+        </header>
         
-        <!-- SECTION 1: ADOPTION HUB -->
-        <section id="adoption" class="section-card">
-            <h2>🏡 Adoption Center</h2>
-            <p>Browse available pet profiles looking for a permanent loving family, or submit a rescued animal listing to track adoption applicants globally.</p>
-            <div class="placeholder-badge">Status: Live Database Sync Connected</div>
-        </section>
+        <!-- MAIN SECTION MATRIX GRID -->
+        <main class="grid-container">
+            
+            <!-- SECTION 1: ADOPTION HUB -->
+            <section id="adoption" class="section-card">
+                <div>
+                    <div class="card-header">
+                        <span class="card-icon">🏡</span>
+                        <h2>Adoption Center</h2>
+                    </div>
+                    <p>Browse available pet profiles looking for a permanent loving family, or submit a rescued animal listing to track adoption applicants globally.</p>
+                </div>
+                <div class="status-badge-container">
+                    <span class="status-badge badge-success"><span class="dot"></span>Live Database Sync Connected</span>
+                </div>
+            </section>
 
-        <!-- SECTION 2: STRAY CARE MODULE -->
-        <section id="stray-care" class="section-card">
-            <h2>🐕 Stray Care Portal</h2>
-            <p>Log stray animal sightings, coordinate neighborhood rescue efforts, map localized feeder groups, and report injured strays across active municipal sectors.</p>
-            <div class="placeholder-badge">Status: Location Tracking Active</div>
-        </section>
+            <!-- SECTION 2: STRAY CARE MODULE -->
+            <section id="stray-care" class="section-card">
+                <div>
+                    <div class="card-header">
+                        <span class="card-icon">🐕</span>
+                        <h2>Stray Care Portal</h2>
+                    </div>
+                    <p>Log stray animal sightings, coordinate neighborhood rescue efforts, map localized feeder groups, and report injured strays across active municipal sectors.</p>
+                </div>
+                <div class="status-badge-container">
+                    <span class="status-badge badge-warning"><span class="dot"></span>Location Tracking Active</span>
+                </div>
+            </section>
 
-        <!-- SECTION 3: FEEDING TRACKER -->
-        <section id="feeding" class="section-card">
-            <h2>🍽️ Feeding Schedules</h2>
-            <p>Log dietary intake records, balance daily nutritional weight ratios, set up automated alarms, and coordinate community feeding station logs.</p>
-            <div class="placeholder-badge">Status: Logging Matrix Functional</div>
-        </section>
+            <!-- SECTION 3: FEEDING TRACKER -->
+            <section id="feeding" class="section-card">
+                <div>
+                    <div class="card-header">
+                        <span class="card-icon">🍽️</span>
+                        <h2>Feeding Schedules</h2>
+                    </div>
+                    <p>Log dietary intake records, balance daily nutritional weight ratios, set up automated alarms, and coordinate community feeding station logs.</p>
+                </div>
+                <div class="status-badge-container">
+                    <span class="status-badge badge-info"><span class="dot"></span>Logging Matrix Functional</span>
+                </div>
+            </section>
 
-        <!-- SECTION 4: ACCOUNT SETTINGS -->
-        <section id="settings" class="section-card">
-            <h2>⚙️ System Profile Settings</h2>
-            <p>Modify your account full name parameters, set notification delivery triggers, synchronize active contact email addresses, and reset secure passwords.</p>
-            <div class="placeholder-badge">Status: Fully Secured</div>
-        </section>
+            <!-- SECTION 4: ACCOUNT SETTINGS -->
+            <section id="settings" class="section-card">
+                <div>
+                    <div class="card-header">
+                        <span class="card-icon">⚙️</span>
+                        <h2>System Profile Settings</h2>
+                    </div>
+                    <p>Modify your account full name parameters, set notification delivery triggers, synchronize active contact email addresses, and reset secure passwords.</p>
+                </div>
+                <div class="status-badge-container">
+                    <span class="status-badge badge-secure"><span class="dot"></span>Fully Secured Platform</span>
+                </div>
+            </section>
+
+        </main>
     </div>
 
 </body>
