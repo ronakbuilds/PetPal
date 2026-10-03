@@ -1,83 +1,165 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>PetPal — Ultimate Dashboard Overview</title>
     <!-- FIXED: Links perfectly to your dedicated stylesheet layout metrics -->
-    <link rel="stylesheet" href="dashboard-style.css">
-    <link href="https://googleapis.com" rel="stylesheet">
-</head>
-<body>
-
+    <link rel="stylesheet" href="dashboard-style.css" />
+    <link href="https://googleapis.com" rel="stylesheet" />
+  </head>
+  <body>
     <!-- UNIFIED GLOBAL HORIZONTAL APP HEADER BAR -->
     <nav class="app-header-bar">
-        <div class="brand-logo">
-            <h2><a href="index.html">🐾 PetPal</a></h2>
-        </div>
-        <ul class="horizontal-nav-links">
-            <li><a href="#overview-section" class="nav-link-item active">📊 Overview</a></li>
-            <li><a href="#my-pets-section" class="nav-link-item">🐾 My Pets</a></li>
-            <li><a href="#vaccinations-section" class="nav-link-item">💉 Vaccinations</a></li>
-            <li><a href="./community.html#adoption" class="nav-link-item">🏡 Adoption Hub</a></li>
-            <li><a href="./community.html#stray-care" class="nav-link-item">🐕 Stray Care</a></li>
-            <li><a href="./community.html#feeding" class="nav-link-item">🍽️ Feeding</a></li>
-            <li><a href="./community.html#settings" class="nav-link-item">⚙️ Settings</a></li>
-            <li><a href="#" id="logout-btn-trigger" class="nav-link-item" style="color: var(--danger-color); font-weight: 700;">↩️ Logout</a></li>
-        </ul>
+      <div class="brand-logo">
+        <h2>
+          <a
+            href="index.html"
+            class="logo-link"
+            style="
+              text-decoration: none;
+              color: #2563eb;
+              transition: opacity 0.2s ease;
+            "
+            >🐾 PetPal</a
+          >
+        </h2>
+      </div>
+
+      <ul class="horizontal-nav-links">
+        <li>
+          <a href="#overview-section" class="nav-link-item active"
+            >📊 Overview</a
+          >
+        </li>
+        <li><a href="#my-pets-section" class="nav-link-item">🐾 My Pets</a></li>
+        <li>
+          <a href="#vaccinations-section" class="nav-link-item"
+            >💉 Vaccinations</a
+          >
+        </li>
+        <li>
+          <a href="./community.html#adoption" class="nav-link-item"
+            >🏡 Adoption Hub</a
+          >
+        </li>
+        <li>
+          <a href="./community.html#stray-care" class="nav-link-item"
+            >🐕 Stray Care</a
+          >
+        </li>
+        <li>
+          <a href="./community.html#feeding" class="nav-link-item"
+            >🍽️ Feeding</a
+          >
+        </li>
+        <li>
+          <a href="./community.html#settings" class="nav-link-item"
+            >⚙️ Settings</a
+          >
+        </li>
+        <li>
+          <a
+            href="#"
+            id="logout-btn-trigger"
+            class="nav-link-item"
+            style="color: var(--danger-color); font-weight: 700"
+            >↩️ Logout</a
+          >
+        </li>
+      </ul>
     </nav>
 
     <!-- CONTENT DISPLAY CANVAS -->
     <div class="main-content">
-        
-        <!-- SECTION A: OVERVIEW HERO -->
-        <div id="overview-section" class="welcome-msg">
-            <h1 id="welcome-user-text">Welcome Back!</h1>
-            <p>Here is a live look at your active pet care metrics today.</p>
-            
-            <div class="stats-grid">
-                <div class="stats-card">
-                    <h4>Registered Pets</h4>
-                    <h3 id="live-pet-counter">0</h3>
-                </div>
-                <div class="stats-card">
-                    <h4>Upcoming Vaccinations</h4>
-                    <h3 id="live-vaccine-counter">0</h3>
-                </div>
-                <div class="stats-card">
-                    <h4>Ecosystem Engine</h4>
-                    <div class="status-badge"><span class="dot"></span>Secure Sync Active</div>
-                </div>
-            </div>
-        </div>
+      <!-- SECTION A: OVERVIEW HERO -->
+      <div id="overview-section" class="welcome-msg">
+        <h1 id="welcome-user-text">Welcome Back!</h1>
+        <p>Here is a live look at your active pet care metrics today.</p>
 
-        <!-- SECTION B: PREMIUM IMMUNIZATION TABLE GRAPHICS -->
-        <div id="vaccinations-section" class="section-card">
-            <div style="border-bottom: 1px solid var(--border-color); padding-bottom: 1rem; margin-bottom: 1.5rem;">
-                <h2>💉 Immunization Schedules & Vaccination Records</h2>
-                <p style="color: var(--text-muted); font-size: 0.95rem; margin-top: 0.25rem;">Live verification sheets mapping current booster target timelines.</p>
+        <div class="stats-grid">
+          <div class="stats-card">
+            <h4>Registered Pets</h4>
+            <h3 id="live-pet-counter">0</h3>
+          </div>
+          <div class="stats-card">
+            <h4>Upcoming Vaccinations</h4>
+            <h3 id="live-vaccine-counter">0</h3>
+          </div>
+          <div class="stats-card">
+            <h4>Ecosystem Engine</h4>
+            <div class="status-badge">
+              <span class="dot"></span>Secure Sync Active
             </div>
-            <div id="dynamic-vaccine-list" class="vax-container-grid"></div>
+          </div>
         </div>
+      </div>
 
-        <!-- SECTION C: LIVE OWNED PET PROFILES LIST GRID -->
-        <div id="my-pets-section" class="section-card">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; border-bottom: 1px solid var(--border-color); padding-bottom: 1rem;">
-                <h2>🐾 Active Registered Pet Profiles</h2>
-                <a href="./pet-profile.html" class="btn-action-primary" style="text-decoration: none;">+ Add Pet</a>
-            </div>
-            <div id="real-pet-grid-container" class="pet-grid"></div>
+      <!-- SECTION B: PREMIUM IMMUNIZATION TABLE GRAPHICS -->
+      <div id="vaccinations-section" class="section-card">
+        <div
+          style="
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1rem;
+            margin-bottom: 1.5rem;
+          "
+        >
+          <h2>💉 Immunization Schedules & Vaccination Records</h2>
+          <p
+            style="
+              color: var(--text-muted);
+              font-size: 0.95rem;
+              margin-top: 0.25rem;
+            "
+          >
+            Live verification sheets mapping current booster target timelines.
+          </p>
         </div>
+        <div id="dynamic-vaccine-list" class="vax-container-grid"></div>
+      </div>
 
+      <!-- SECTION C: LIVE OWNED PET PROFILES LIST GRID -->
+      <div id="my-pets-section" class="section-card">
+        <div
+          style="
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1rem;
+          "
+        >
+          <h2>🐾 Active Registered Pet Profiles</h2>
+          <a
+            href="./pet-profile.html"
+            class="btn-action-primary"
+            style="text-decoration: none"
+            >+ Add Pet</a
+          >
+        </div>
+        <div id="real-pet-grid-container" class="pet-grid"></div>
+      </div>
     </div>
 
     <!-- FIXED: Hidden full-screen layout container that triggers strictly when Logout is clicked -->
     <div id="logout-overlay-screen">
-        <div class="spinner"></div>
-        <h2 style="margin-top: 1.5rem; font-weight: 600; font-size: 1.35rem; letter-spacing: -0.5px;">Logging Out Securely...</h2>
-        <p style="color: #64748b; font-size: 0.95rem; margin-top: 0.4rem;">Wiping profile tokens and data cache context sessions.</p>
+      <div class="spinner"></div>
+      <h2
+        style="
+          margin-top: 1.5rem;
+          font-weight: 600;
+          font-size: 1.35rem;
+          letter-spacing: -0.5px;
+        "
+      >
+        Logging Out Securely...
+      </h2>
+      <p style="color: #64748b; font-size: 0.95rem; margin-top: 0.4rem">
+        Wiping profile tokens and data cache context sessions.
+      </p>
     </div>
 
     <script src="dashboard-sync.js"></script>
-</body>
-</html> 
+  </body>
+</html>

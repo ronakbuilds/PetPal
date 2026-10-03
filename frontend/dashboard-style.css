@@ -318,3 +318,9 @@ body {
 }
 
 @keyframes clean-spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+/* Logo Hover Effect */
+.logo-link:hover {
+    text-decoration: none !important; /* Forces underline to stay hidden */
+    opacity: 0.8; /* Creates a clean, premium fade on hover */
+}   
