@@ -1,7 +1,10 @@
 document.addEventListener("DOMContentLoaded", async () => {
   // 1. Authenticate cached local storage records token keys
   const userString = localStorage.getItem("user");
-  if (!userString) { window.location.href = "./login.html"; return; }
+  if (!userString) { 
+      window.location.href = "./login.html"; 
+      return; 
+  }
   const user = JSON.parse(userString);
   
   const welcomeHeader = document.querySelector("#welcome-user-text");
@@ -25,8 +28,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       if (vaccineList) vaccineList.innerHTML = "";
 
       if (pets.length === 0) {
-        if (petGrid) petGrid.innerHTML = `<p style="color:#64748b; font-style:italic;">No registered pets found. Click '+ Add Pet' to initialize tracking profiles.</p>`;
-        if (vaccineList) vaccineList.innerHTML = `<p style="color:#64748b;">No pending upcoming immunizations targets scheduled.</p>`;
+        if (petGrid) petGrid.innerHTML = `<p style="color:#64748b; font-style:italic; grid-column: 1/-1; padding: 1.5rem 0;">No registered pets found. Click '+ Add Pet' to initialize tracking profiles.</p>`;
+        if (vaccineList) vaccineList.innerHTML = `<p style="color:#64748b; padding: 0.5rem 0;">No pending upcoming immunizations targets scheduled.</p>`;
         if (vaccineCounter) vaccineCounter.textContent = "0";
         return;
       }
@@ -72,16 +75,23 @@ document.addEventListener("DOMContentLoaded", async () => {
       });
       if (vaccineCounter) vaccineCounter.textContent = activeVaccinesCount;
     }
-  } catch (err) { console.error("Ruptured cloud sync communication parameters layer:", err); }
+  } catch (err) { 
+      console.error("Ruptured cloud sync communication parameters layer:", err); 
+  }
 });
 
-// 3. Wiping token arrays logic matching logout triggers
+// 3. SECURE LOGOUT REDIRECTION ACTION ENGINE
 const logoutBtnNode = document.querySelector("#logout-btn-trigger");
 if (logoutBtnNode) {
   logoutBtnNode.addEventListener("click", (e) => {
     e.preventDefault();
     const overlay = document.querySelector("#logout-overlay-screen");
-    if (overlay) overlay.style.display = "flex";
-    setTimeout(() => { localStorage.removeItem("user"); window.location.href = "./login.html"; }, 1800);
+    if (overlay) {
+        overlay.style.display = "flex"; // Displays full loading screen only upon explicit click selection
+    }
+    setTimeout(() => { 
+        localStorage.removeItem("user"); // Wipes your active profile state tokens 
+        window.location.href = "./login.html"; // Routes your browser directly back to the login layout sheet page!
+    }, 2000);
   });
 }
