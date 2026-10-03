@@ -9,22 +9,31 @@
 </head>
 <body>
 
+    <!-- MATCHING HORIZONTAL TOP APPLICATION HEADER BAR -->
+    <nav class="app-header-bar">
+        <div class="brand-logo">
+            <h2>🐾 PetPal</h2>
+        </div>
+        <ul class="horizontal-nav-links">
+            <li><a href="./dashboard.html#overview-section" class="nav-link-item">📊 Overview</a></li>
+            <li><a href="./dashboard.html#my-pets-section" class="nav-link-item">🐾 My Pets</a></li>
+            <li><a href="./dashboard.html#vaccinations-section" class="nav-link-item">💉 Vaccinations</a></li>
+            <li><a href="#adoption" class="nav-link-item active">🏡 Adoption</a></li>
+            <li><a href="#stray-care" class="nav-link-item">🐕 Stray Care</a></li>
+            <li><a href="#feeding" class="nav-link-item">🍽️ Feeding</a></li>
+            <li><a href="#settings" class="nav-link-item">⚙️ Settings</a></li>
+            <li><a href="#" id="logout-btn-trigger" class="nav-link-item" style="color: var(--danger-color); font-weight: 600;">↩️ Logout</a></li>
+        </ul>
+    </nav>
+
     <div class="app-container">
-        <!-- GLOBAL APP RETURNING LINE BAR -->
-        <header class="top-nav-bar">
-            <a href="./dashboard.html" class="nav-back-link">← Dashboard Overview</a>
-            <div style="text-align: right;">
-                <h1 style="font-size: 1.6rem; font-weight: 700; letter-spacing: -0.5px;">Community Modules</h1>
-                <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.25rem;">Social workspace systems and profile controls</p>
-            </div>
-        </header>
         
-        <!-- CARDS COLUMNS GRIDS MATRIX -->
+        <!-- SECTIONS GRID ROW MATRIX -->
         <main class="grid-container">
             
             <section id="adoption" class="section-card-alt">
                 <div>
-                    <div style="display:flex; align-items:center; gap:10px; margin-bottom:1rem;"><h2>🏡 Adoption Center</h2></div>
+                    <h2 style="margin-bottom: 0.75rem;">🏡 Adoption Center</h2>
                     <p>Browse available pet profiles looking for a permanent loving family, or submit a rescued animal listing to track adoption applicants globally.</p>
                 </div>
                 <div><span class="status-badge"><span class="dot"></span>Live Database Active</span></div>
@@ -32,7 +41,7 @@
 
             <section id="stray-care" class="section-card-alt">
                 <div>
-                    <div style="display:flex; align-items:center; gap:10px; margin-bottom:1rem;"><h2>🐕 Stray Care Portal</h2></div>
+                    <h2 style="margin-bottom: 0.75rem;">🐕 Stray Care Portal</h2>
                     <p>Log stray animal sightings, coordinate neighborhood rescue efforts, map localized feeder groups, and report injured strays across active municipal sectors.</p>
                 </div>
                 <div><span class="status-badge" style="background:#fffbeb; color:#b45309;"><span class="dot" style="background:#f59e0b;"></span>Tracking Sync Operational</span></div>
@@ -40,7 +49,7 @@
 
             <section id="feeding" class="section-card-alt">
                 <div>
-                    <div style="display:flex; align-items:center; gap:10px; margin-bottom:1rem;"><h2>🍽️ Feeding Schedules</h2></div>
+                    <h2 style="margin-bottom: 0.75rem;">🍽️ Feeding Schedules</h2>
                     <p>Log dietary intake records, balance daily nutritional weight ratios, set up automated alarms, and coordinate community feeding station logs.</p>
                 </div>
                 <div><span class="status-badge" style="background:#f0fdfa; color:#0f766e;"><span class="dot" style="background:#14b8a6;"></span>Matrix Active</span></div>
@@ -48,7 +57,7 @@
 
             <section id="settings" class="section-card-alt">
                 <div>
-                    <div style="display:flex; align-items:center; gap:10px; margin-bottom:1rem;"><h2>⚙️ System Profile Settings</h2></div>
+                    <h2 style="margin-bottom: 0.75rem;">⚙️ System Profile Settings</h2>
                     <p>Modify your account full name parameters, set notification delivery triggers, synchronize active contact email addresses, and reset secure passwords.</p>
                 </div>
                 <div><span class="status-badge" style="background:#f8fafc; color:#475569; border:1px solid var(--border-color);"><span class="dot" style="background:#64748b;"></span>Fully Secured Layer</span></div>
@@ -57,5 +66,23 @@
         </main>
     </div>
 
+    <!-- TRANSITION OVERLAY DIALOG FOR COMMUNITY EXECUTIONS -->
+    <div id="logout-overlay-screen">
+        <div class="spinner"></div>
+        <h2 style="margin-top: 1.5rem; font-weight: 500; font-size: 1.25rem;">Logging Out Securely...</h2>
+    </div>
+
+    <!-- Include matching script controls inside community page to make logout operational -->
+    <script>
+      const logoutTriggerNode = document.querySelector("#logout-btn-trigger");
+      if (logoutTriggerNode) {
+        logoutTriggerNode.addEventListener("click", (e) => {
+          e.preventDefault();
+          const overlay = document.querySelector("#logout-overlay-screen");
+          if (overlay) overlay.style.display = "flex";
+          setTimeout(() => { localStorage.removeItem("user"); window.location.href = "./login.html"; }, 1800);
+        });
+      }
+    </script>
 </body>
 </html>

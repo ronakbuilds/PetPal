@@ -3,41 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PetPal — Core Dashboard</title>
+    <title>PetPal — Dashboard Panel</title>
     <link rel="stylesheet" href="dashboard-style.css">
     <link href="https://googleapis.com" rel="stylesheet">
 </head>
 <body>
 
-    <!-- VERTICAL NAVIGATION SIDEBAR COLUMNS -->
-    <div class="sidebar">
-        <div class="logo-section">
+    <!-- HORIZONTAL TOP APPLICATION HEADER BAR -->
+    <nav class="app-header-bar">
+        <div class="brand-logo">
             <h2>🐾 PetPal</h2>
         </div>
-        <ul class="nav-links">
-            <li class="section-title">Main</li>
-            <li><a href="#overview-section" class="sidebar-item active">📊 Overview</a></li>
-            <li><a href="#my-pets-section" class="sidebar-item">🐾 My Pets</a></li>
-            <li><a href="#vaccinations-section" class="sidebar-item">💉 Vaccinations</a></li>
-            
-            <li class="section-title">Community</li>
-            <li><a href="./community.html#adoption" class="sidebar-item">🏡 Adoption Hub</a></li>
-            <li><a href="./community.html#stray-care" class="sidebar-item">🐕 Stray Care</a></li>
-            <li><a href="./community.html#feeding" class="sidebar-item">🍽️ Feeding</a></li>
-            
-            <li class="section-title">Account</li>
-            <li><a href="./community.html#settings" class="sidebar-item">⚙️ Settings</a></li>
-            <li><a href="#" id="logout-btn-trigger" class="sidebar-item" style="color: var(--danger-color); font-weight: 600;">↩️ Logout</a></li>
+        <ul class="horizontal-nav-links">
+            <li><a href="#overview-section" class="nav-link-item active">📊 Overview</a></li>
+            <li><a href="#my-pets-section" class="nav-link-item">🐾 My Pets</a></li>
+            <li><a href="#vaccinations-section" class="nav-link-item">💉 Vaccinations</a></li>
+            <li><a href="./community.html#adoption" class="nav-link-item">🏡 Adoption</a></li>
+            <li><a href="./community.html#stray-care" class="nav-link-item">🐕 Stray Care</a></li>
+            <li><a href="./community.html#feeding" class="nav-link-item">🍽️ Feeding</a></li>
+            <li><a href="./community.html#settings" class="nav-link-item">⚙️ Settings</a></li>
+            <li><a href="#" id="logout-btn-trigger" class="nav-link-item" style="color: var(--danger-color); font-weight: 600;">↩️ Logout</a></li>
         </ul>
-    </div>
+    </nav>
 
-    <!-- MAIN DISPLAY VIEWPORT -->
+    <!-- CONTENT SURFACE -->
     <div class="main-content">
         
-        <!-- SECTION A: RUNTIME OVERVIEW MATRICES -->
+        <!-- MODULE A: OVERVIEW MATRICES -->
         <div id="overview-section" class="welcome-msg" style="margin-bottom: 3rem;">
             <h1 id="welcome-user-text">Welcome Back!</h1>
-            <p>Here is a real-time synchronized look at your data matrices today.</p>
+            <p>Here is a live look at your active pet care metrics today.</p>
             
             <div class="stats-grid">
                 <div class="stats-card">
@@ -49,13 +44,13 @@
                     <h3 id="live-vaccine-counter">0</h3>
                 </div>
                 <div class="stats-card">
-                    <h4>Database Pipeline</h4>
+                    <h4>Ecosystem Engine</h4>
                     <div class="status-badge"><span class="dot"></span>Secure Sync Active</div>
                 </div>
             </div>
         </div>
 
-        <!-- SECTION B: PREMIUM HOVER RESTRUCTURING VACCINATION LOGS -->
+        <!-- MODULE B: PREMIUM HOVER RESTRUCTURING VACCINATION RECORDS -->
         <div id="vaccinations-section" class="section-card">
             <div style="border-bottom: 1px solid #e2e8f0; padding-bottom: 1rem; margin-bottom: 1.5rem;">
                 <h2>💉 Immunization Schedules & Vaccination Records</h2>
@@ -64,22 +59,22 @@
             <div id="dynamic-vaccine-list" class="vax-container-grid"></div>
         </div>
 
-        <!-- SECTION C: DYNAMIC OWNED PETS DATA GRID -->
-        <div id="my-pets-section" style="scroll-margin-top: 2rem;">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
-                <h2 style="color: var(--text-main); font-size: 1.35rem; font-weight: 700; margin: 0;">🐾 Active Registered Pet Profiles</h2>
-                <a href="./pet-profile.html" class="btn-action-primary">+ Add Pet</a>
+        <!-- MODULE C: MY REAL PET TILES GRID -->
+        <div id="my-pets-section" class="section-card">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; border-bottom: 1px solid #e2e8f0; padding-bottom: 1rem;">
+                <h2>🐾 Active Registered Pet Profiles</h2>
+                <a href="./pet-profile.html" class="btn-action-primary" style="text-decoration: none;">+ Add Pet</a>
             </div>
             <div id="real-pet-grid-container" class="pet-grid"></div>
         </div>
 
     </div>
 
-    <!-- IMMERSIVE SECURE TRANSITION DIALOG OVERLAY -->
+    <!-- TRANSITION OVERLAY DIALOG -->
     <div id="logout-overlay-screen">
         <div class="spinner"></div>
         <h2 style="margin-top: 1.5rem; font-weight: 500; font-size: 1.25rem;">Logging Out Securely...</h2>
-        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.4rem;">Clearing server credentials and profile state sessions.</p>
+        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.4rem;">Clearing credentials and profile state sessions.</p>
     </div>
 
     <script src="dashboard-sync.js"></script>
