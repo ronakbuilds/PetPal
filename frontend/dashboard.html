@@ -32,26 +32,31 @@
       </div>
     </nav>
 
-    <div class="dash-shell">
-      <aside class="dash-side">
-        <h4>Main</h4>
-<!-- MAIN NAVIGATION LINKS -->
-<ul class="nav-links" style="list-style: none; padding-left: 0; margin: 0;">
-    <li class="section-title" style="padding: 0.5rem 1rem; font-size: 0.85rem; color: #94a3b8; font-weight: 700; text-transform: uppercase;">Main</li>
-    <li><a href="#overview-section" class="sidebar-item" style="display: flex; align-items: center; gap: 10px; padding: 0.75rem 1rem; color: #334155; text-decoration: none; font-weight: 500;">📊 Overview</a></li>
-    <li><a href="#my-pets-section" class="sidebar-item" style="display: flex; align-items: center; gap: 10px; padding: 0.75rem 1rem; color: #334155; text-decoration: none; font-weight: 500;">🐾 My Pets</a></li>
-    <li><a href="#vaccinations-section" class="sidebar-item" style="display: flex; align-items: center; gap: 10px; padding: 0.75rem 1rem; color: #334155; text-decoration: none; font-weight: 500;">💉 Vaccinations</a></li>
-    <li><a href="#feeding-section" class="sidebar-item" style="display: flex; align-items: center; gap: 10px; padding: 0.75rem 1rem; color: #334155; text-decoration: none; font-weight: 500;">🍽️ Feeding</a></li>
+    <!-- DYNAMIC NAVIGATION SIDEBAR CONTAINER -->
+<div class="sidebar">
+    <div class="logo-section" style="padding: 0 1.5rem 1.5rem 1.5rem; border-bottom: 1px solid #f1f5f9; margin-bottom: 1rem;">
+        <h2 style="font-size: 1.25rem; color: #0f172a; font-weight: 700; margin: 0;">🐾 PetPal</h2>
+    </div>
     
-    <li class="section-title" style="margin-top: 1.5rem; padding: 0.5rem 1rem; font-size: 0.85rem; color: #94a3b8; font-weight: 700; text-transform: uppercase;">Community</li>
-    <li><a href="./community.html#adoption" class="sidebar-item" style="display: flex; align-items: center; gap: 10px; padding: 0.75rem 1rem; color: #334155; text-decoration: none; font-weight: 500;">🏡 Adoption</a></li>
-    <li><a href="./community.html#stray-care" class="sidebar-item" style="display: flex; align-items: center; gap: 10px; padding: 0.75rem 1rem; color: #334155; text-decoration: none; font-weight: 500;">🐕 Stray Care</a></li>
-    <li><a href="#ai-assistant-section" class="sidebar-item" style="display: flex; align-items: center; gap: 10px; padding: 0.75rem 1rem; color: #334155; text-decoration: none; font-weight: 500;">🤖 AI Assistant</a></li>
-    
-    <li class="section-title" style="margin-top: 1.5rem; padding: 0.5rem 1rem; font-size: 0.85rem; color: #94a3b8; font-weight: 700; text-transform: uppercase;">Account</li>
-    <li><a href="./community.html#settings" class="sidebar-item" style="display: flex; align-items: center; gap: 10px; padding: 0.75rem 1rem; color: #334155; text-decoration: none; font-weight: 500;">⚙️ Settings</a></li>
-    <li><a href="#" id="logout-btn-trigger" class="sidebar-item logout-link" style="display: flex; align-items: center; gap: 10px; padding: 0.75rem 1rem; color: #ef4444; text-decoration: none; font-weight: 600;">↩️ Logout</a></li>
-</ul>
+    <!-- THE MANDATORY PARENT WRAPPER LIST TAG -->
+    <ul class="nav-links" style="list-style: none; padding-left: 0; margin: 0;">
+        <li class="section-title" style="padding: 0.5rem 1.5rem; font-size: 0.75rem; color: #94a3b8; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">Main</li>
+        <li><a href="#overview-section" class="sidebar-item" style="display: flex; align-items: center; gap: 10px; padding: 0.75rem 1.5rem; color: #334155; text-decoration: none; font-weight: 500;">📊 Overview</a></li>
+        <li><a href="#my-pets-section" class="sidebar-item" style="display: flex; align-items: center; gap: 10px; padding: 0.75rem 1.5rem; color: #334155; text-decoration: none; font-weight: 500;">🐾 My Pets</a></li>
+        <li><a href="#vaccinations-section" class="sidebar-item" style="display: flex; align-items: center; gap: 10px; padding: 0.75rem 1.5rem; color: #334155; text-decoration: none; font-weight: 500;">💉 Vaccinations</a></li>
+        <li><a href="#feeding-section" class="sidebar-item" style="display: flex; align-items: center; gap: 10px; padding: 0.75rem 1.5rem; color: #334155; text-decoration: none; font-weight: 500;">🍽️ Feeding</a></li>
+        
+        <li class="section-title" style="margin-top: 1.5rem; padding: 0.5rem 1.5rem; font-size: 0.75rem; color: #94a3b8; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">Community</li>
+        <li><a href="./community.html#adoption" class="sidebar-item" style="display: flex; align-items: center; gap: 10px; padding: 0.75rem 1.5rem; color: #334155; text-decoration: none; font-weight: 500;">🏡 Adoption</a></li>
+        <li><a href="./community.html#stray-care" class="sidebar-item" style="display: flex; align-items: center; gap: 10px; padding: 0.75rem 1.5rem; color: #334155; text-decoration: none; font-weight: 500;">🐕 Stray Care</a></li>
+        <li><a href="#ai-assistant-section" class="sidebar-item" style="display: flex; align-items: center; gap: 10px; padding: 0.75rem 1.5rem; color: #334155; text-decoration: none; font-weight: 500;">🤖 AI Assistant</a></li>
+        
+        <li class="section-title" style="margin-top: 1.5rem; padding: 0.5rem 1.5rem; font-size: 0.75rem; color: #94a3b8; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">Account</li>
+        <li><a href="./community.html#settings" class="sidebar-item" style="display: flex; align-items: center; gap: 10px; padding: 0.75rem 1.5rem; color: #334155; text-decoration: none; font-weight: 500;">⚙️ Settings</a></li>
+        <li><a href="#" id="logout-btn-trigger" class="sidebar-item logout-link" style="display: flex; align-items: center; gap: 10px; padding: 0.75rem 1.5rem; color: #ef4444; text-decoration: none; font-weight: 600;">↩️ Logout</a></li>
+    </ul>
+</div>
+
 
 
       </aside>
