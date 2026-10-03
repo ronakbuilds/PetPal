@@ -500,3 +500,66 @@ p  { margin: 0 0 1rem; color: var(--text-muted); }
     margin-left: 250px !important;
     padding: 2.5rem !important;
 }
+
+/* ==========================================================================
+   GLOBAL COMMON HORIZONTAL TOP BAR NAV LAYOUT (FOR ALL PAGES)
+   ========================================================================== */
+body {
+    display: flex;
+    flex-direction: column !important; /* Stacks header on top, contents below */
+    margin: 0;
+    background-color: #f8fafc;
+}
+
+/* Common Header Wrapper Box */
+.app-header-bar, .navbar {
+    width: 100% !important;
+    background-color: #ffffff !important;
+    border-bottom: 1px solid #e2e8f0 !important;
+    display: flex !important;
+    flex-direction: row !important; /* Strict straight horizontal line layout */
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 1.25rem 3rem !important;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.02);
+}
+
+/* Common Horizontal Links List */
+.horizontal-nav-links, .nav-links {
+    display: flex !important;
+    flex-direction: row !important; /* Forces flat line list row arrangement */
+    align-items: center !important;
+    gap: 1.5rem !important;
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+/* Common Navbar Anchor Items */
+.nav-link-item, .nav-links a, .sidebar-item {
+    color: #475569 !important;
+    text-decoration: none !important;
+    font-weight: 500 !important;
+    font-size: 0.95rem !important;
+    padding: 0.5rem 1rem !important;
+    border-radius: 6px !important;
+    display: inline-block !important; /* Prevents text elements from breaking lines */
+    transition: all 0.2s ease;
+}
+
+.nav-link-item:hover, .nav-link-item.active, .nav-links a:hover, .sidebar-item:hover {
+    background-color: #f1f5f9 !important;
+    color: #0f172a !important;
+}
+
+/* Main Content Area Adjustments */
+.main-content, .app-container {
+    margin-left: 0 !important; /* Erases any remaining old vertical sidebar margins */
+    padding: 3rem 1.5rem !important;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto !important;
+}
