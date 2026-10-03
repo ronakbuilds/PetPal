@@ -453,19 +453,50 @@ p  { margin: 0 0 1rem; color: var(--text-muted); }
     box-sizing: border-box !important; /* Locks structural padding inside the width dimensions */
 }
 
-/* Ensure the grid wrapper behaves properly across form rows */
-.row {
-    width: 100%;
-    max-width: 100%;
-    overflow: hidden;              /* Cleanly clips any structural pixel bleed-out */
+/* Lock Navigation Sidebar to Left Standing Column Position */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100vh;
+    background-color: #ffffff;
+    border-right: 1px solid #e2e8f0;
+    display: flex !important;
+    flex-direction: column !important; /* Forces items to stand vertically */
+    padding: 1.5rem 0;
+    z-index: 999;
 }
 
-/* Fix Recent Activities Visibility on Dashboard */
-.recent-activities-container, 
-.activity-item,
-.activity-item span,
-.activity-time {
-    color: #0f172a !important; /* Bold Midnight Dark Slate */
-    font-weight: 600 !important;
-    text-shadow: none !important;
+.nav-links {
+    display: flex !important;
+    flex-direction: column !important; /* Stack menu items in a single column */
+    gap: 0.25rem;
+    width: 100%;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0.8rem 1.5rem;
+    color: #334155;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: background 0.2s ease;
+}
+
+.sidebar-item:hover {
+    background-color: #f1f5f9;
+    color: #0f172a;
+}
+
+/* Give the main dashboard dashboard body padding so it doesn't hide behind sidebar */
+.main-content {
+    margin-left: 250px !important;
+    padding: 2.5rem !important;
 }

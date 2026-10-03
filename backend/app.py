@@ -34,34 +34,82 @@ def register():
     cursor = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
 
     try:
-        try:
-            # 1. Try inserting with 'fullname' column name
-            cursor.execute("""
-            INSERT INTO users (fullname, email, password, role)
-            VALUES (%s, %s, %s, %s)
-            """, (fullname, email, password, role))
-            conn.commit()
-        except Exception as db_err:
-            # 2. If it fails, rollback and try inserting with 'name' column name instead
-            conn.rollback()
-            cursor.execute("""
-            INSERT INTO users (name, email, password, role)
-            VALUES (%s, %s, %s, %s)
-            """, (fullname, email, password, role))
-            conn.commit()
+        cursor.execute("""
+            SELECT COLUMN_NAME 
+            FROM INFORMATION_SCHEMA.COLUMNS 
+            WHERE TABLE_NAME = 'users' AND COLUMN_NAME = 'fullname'
+        """)
+        has_fullname = cursor.fetchone()
 
-        return jsonify({
-            "success": True,
-            "message": "Registration Successful"
-        })
+        if has_fullname:
+            cursor.execute("""
+                INSERT INTO users (fullname, email, password, role)
+                VALUES (%s, %s, %s, %s)
+            """, (fullname, email, password, role))
+        else:
+            cursor.execute("""
+                INSERT INTO users (name, email, password, role)
+                VALUES (%s, %s, %s, %s)
+            """, (fullname, email, password, role))
 
+        conn.commit()
+        return jsonify({"success": True, "message": "Registration Successful"})
     except Exception as e:
-        return jsonify({
-            "success": False,
-            "message": f"Database Error: {str(e)}"
-        })
+        if conn: conn.rollback()
+        return jsonify({"success": False, "message": f"Database Error: {str(e)}"})
     finally:
-        # FIXED: Added critical connection shutdown to prevent socket blocking crashes
+        cursor.close()
+        conn.close()
+
+@app.route("/add_pet", methods=["POST"])
+def add_pet():
+    data = request.get_json()
+
+    try:
+        user_id = data.get("user_id")
+        pet_name = data.get("pet_name", "").strip()
+        pet_type = data.get("pet_type", "Dog").strip()
+        breed = data.get("breed", "").strip()
+        gender = data.get("gender", "Male").strip()
+        medical_notes = data.get("medical_notes", "").strip()
+
+        raw_age = data.get("age", 0)
+        age = int(round(float(raw_age))) if raw_age else 0
+
+        raw_weight = data.get("weight", 0)
+        weight = float(raw_weight) if raw_weight else 0.0
+
+        vaccination_date = data.get("vaccination_date")
+        if not vaccination_date or vaccination_date.strip() == "": vaccination_date = None
+
+        next_vaccination_date = data.get("next_vaccination_date")
+        if not next_vaccination_date or next_vaccination_date.strip() == "": next_vaccination_date = None
+
+        if not user_id or not pet_name:
+            return jsonify({"success": False, "message": "User ID and Pet Name are required fields."})
+    except Exception as parse_err:
+        return jsonify({"success": False, "message": f"Data Parsing Error: {str(parse_err)}"})
+
+    conn = get_db_connection()
+    cursor = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+
+    try:
+        cursor.execute("""
+        INSERT INTO pets(
+            user_id, pet_name, pet_type, breed, gender, age, weight,
+            vaccination_date, next_vaccination_date, medical_notes
+        )
+        VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+        """, (
+            user_id, pet_name, pet_type, breed, gender, age, weight,
+            vaccination_date, next_vaccination_date, medical_notes
+        ))
+        conn.commit()
+        return jsonify({"success": True, "message": "Pet Registered Successfully"})
+    except Exception as e:
+        if conn: conn.rollback()
+        return jsonify({"success": False, "message": f"Database Error: {str(e)}"})
+    finally:
         cursor.close()
         conn.close()
 

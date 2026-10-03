@@ -1,383 +1,87 @@
-<!doctype html>
-<!-- Frontend only — connect to Flask + MySQL later. -->
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dashboard — PetPal</title>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <nav class="navbar">
-      <div class="nav-inner">
-        <a href="index.html" class="logo"
-          ><span class="logo-mark">🐾</span> PetPal</a
-        >
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PetPal — Core Dashboard</title>
+    <link rel="stylesheet" href="dashboard-style.css">
+    <link href="https://googleapis.com" rel="stylesheet">
+</head>
+<body>
+
+    <!-- VERTICAL NAVIGATION SIDEBAR COLUMNS -->
+    <div class="sidebar">
+        <div class="logo-section">
+            <h2>🐾 PetPal</h2>
+        </div>
         <ul class="nav-links">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="services.html">Services</a></li>
-          <li><a href="dashboard.html">Dashboard</a></li>
-          <li><a href="pet-profile.html">Pet Profile</a></li>
-          <li><a href="contact.html">Contact</a></li>
+            <li class="section-title">Main</li>
+            <li><a href="#overview-section" class="sidebar-item active">📊 Overview</a></li>
+            <li><a href="#my-pets-section" class="sidebar-item">🐾 My Pets</a></li>
+            <li><a href="#vaccinations-section" class="sidebar-item">💉 Vaccinations</a></li>
+            
+            <li class="section-title">Community</li>
+            <li><a href="./community.html#adoption" class="sidebar-item">🏡 Adoption Hub</a></li>
+            <li><a href="./community.html#stray-care" class="sidebar-item">🐕 Stray Care</a></li>
+            <li><a href="./community.html#feeding" class="sidebar-item">🍽️ Feeding</a></li>
+            
+            <li class="section-title">Account</li>
+            <li><a href="./community.html#settings" class="sidebar-item">⚙️ Settings</a></li>
+            <li><a href="#" id="logout-btn-trigger" class="sidebar-item" style="color: var(--danger-color); font-weight: 600;">↩️ Logout</a></li>
         </ul>
-        <div class="nav-cta">
-          <a href="login.html" class="btn btn-ghost">Logout</a
-          ><button class="hamburger" aria-label="Menu"><span></span></button>
-        </div>
-      </div>
-    </nav>
-
-    <!-- DYNAMIC NAVIGATION SIDEBAR CONTAINER -->
-<div class="sidebar">
-    <div class="logo-section" style="padding: 0 1.5rem 1.5rem 1.5rem; border-bottom: 1px solid #f1f5f9; margin-bottom: 1rem;">
-        <h2 style="font-size: 1.25rem; color: #0f172a; font-weight: 700; margin: 0;">🐾 PetPal</h2>
     </div>
-    
-    <!-- THE MANDATORY PARENT WRAPPER LIST TAG -->
-    <ul class="nav-links" style="list-style: none; padding-left: 0; margin: 0;">
-        <li class="section-title" style="padding: 0.5rem 1.5rem; font-size: 0.75rem; color: #94a3b8; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">Main</li>
-        <li><a href="#overview-section" class="sidebar-item" style="display: flex; align-items: center; gap: 10px; padding: 0.75rem 1.5rem; color: #334155; text-decoration: none; font-weight: 500;">📊 Overview</a></li>
-        <li><a href="#my-pets-section" class="sidebar-item" style="display: flex; align-items: center; gap: 10px; padding: 0.75rem 1.5rem; color: #334155; text-decoration: none; font-weight: 500;">🐾 My Pets</a></li>
-        <li><a href="#vaccinations-section" class="sidebar-item" style="display: flex; align-items: center; gap: 10px; padding: 0.75rem 1.5rem; color: #334155; text-decoration: none; font-weight: 500;">💉 Vaccinations</a></li>
-        <li><a href="#feeding-section" class="sidebar-item" style="display: flex; align-items: center; gap: 10px; padding: 0.75rem 1.5rem; color: #334155; text-decoration: none; font-weight: 500;">🍽️ Feeding</a></li>
+
+    <!-- MAIN DISPLAY VIEWPORT -->
+    <div class="main-content">
         
-        <li class="section-title" style="margin-top: 1.5rem; padding: 0.5rem 1.5rem; font-size: 0.75rem; color: #94a3b8; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">Community</li>
-        <li><a href="./community.html#adoption" class="sidebar-item" style="display: flex; align-items: center; gap: 10px; padding: 0.75rem 1.5rem; color: #334155; text-decoration: none; font-weight: 500;">🏡 Adoption</a></li>
-        <li><a href="./community.html#stray-care" class="sidebar-item" style="display: flex; align-items: center; gap: 10px; padding: 0.75rem 1.5rem; color: #334155; text-decoration: none; font-weight: 500;">🐕 Stray Care</a></li>
-        <li><a href="#ai-assistant-section" class="sidebar-item" style="display: flex; align-items: center; gap: 10px; padding: 0.75rem 1.5rem; color: #334155; text-decoration: none; font-weight: 500;">🤖 AI Assistant</a></li>
-        
-        <li class="section-title" style="margin-top: 1.5rem; padding: 0.5rem 1.5rem; font-size: 0.75rem; color: #94a3b8; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">Account</li>
-        <li><a href="./community.html#settings" class="sidebar-item" style="display: flex; align-items: center; gap: 10px; padding: 0.75rem 1.5rem; color: #334155; text-decoration: none; font-weight: 500;">⚙️ Settings</a></li>
-        <li><a href="#" id="logout-btn-trigger" class="sidebar-item logout-link" style="display: flex; align-items: center; gap: 10px; padding: 0.75rem 1.5rem; color: #ef4444; text-decoration: none; font-weight: 600;">↩️ Logout</a></li>
-    </ul>
-</div>
-
-
-
-      </aside>
-
-      <main class="dash-main">
-        <div class="dash-top">
-          <div>
-            <h1 id="welcomeUser">Welcome 👋</h1>
-            <small>Here's what's happening with your pets today.</small>
-          </div>
-          <div class="avatar avatar-lg">RM</div>
-        </div>
-
-        <div class="grid-4 reveal">
-          <div class="stat-mini">
-            <div class="label">Registered Pets</div>
-            <div class="value" id="petCount">0</div>
-            <div class="delta">+1 this month</div>
-          </div>
-          <div class="stat-mini">
-            <div class="label">Upcoming Vaccinations</div>
-            <div class="value" data-counter="2">0</div>
-            <div class="delta">Next in 3 days</div>
-          </div>
-          <div class="stat-mini">
-            <div class="label">AI Queries</div>
-            <div class="value" data-counter="18">0</div>
-            <div class="delta">Answered Successfully</div>
-          </div>
-          <div class="stat-mini">
-            <div class="label">Adoption Requests</div>
-            <div class="value" data-counter="1">0</div>
-            <div class="delta">1 pending</div>
-          </div>
-        </div>
-
-        <div class="grid-2 reveal" style="margin-top: 1.5rem">
-          <div class="panel">
-            <h3>🔔 Today's Reminder</h3>
-            <ul class="reminder-list" style="margin-top: 1rem">
-              <li class="reminder">
-                <span class="emoji">🐶</span>
-                <div class="info">
-                  <b>Bruno</b><span>Vaccination due in 3 days</span>
+        <!-- SECTION A: RUNTIME OVERVIEW MATRICES -->
+        <div id="overview-section" class="welcome-msg" style="margin-bottom: 3rem;">
+            <h1 id="welcome-user-text">Welcome Back!</h1>
+            <p>Here is a real-time synchronized look at your data matrices today.</p>
+            
+            <div class="stats-grid">
+                <div class="stats-card">
+                    <h4>Registered Pets</h4>
+                    <h3 id="live-pet-counter">0</h3>
                 </div>
-                <span class="tag">Vaccine</span>
-              </li>
-              <li class="reminder warn">
-                <span class="emoji">🐱</span>
-                <div class="info">
-                  <b>Kitty</b><span>Deworming tomorrow</span>
+                <div class="stats-card">
+                    <h4>Upcoming Vaccinations</h4>
+                    <h3 id="live-vaccine-counter">0</h3>
                 </div>
-                <span class="tag">Meds</span>
-              </li>
-              <li class="reminder ok">
-                <span class="emoji">🐕</span>
-                <div class="info">
-                  <b>Sector 5 Stray Dogs</b
-                  ><span>Feeding today at 7:00 PM</span>
+                <div class="stats-card">
+                    <h4>Database Pipeline</h4>
+                    <div class="status-badge"><span class="dot"></span>Secure Sync Active</div>
                 </div>
-                <span class="tag">Feed</span>
-              </li>
-            </ul>
-          </div>
-          <div
-            class="panel"
-            style="
-              background: var(--gradient-primary);
-              color: #fff;
-              border-color: transparent;
-            "
-          >
-            <h3 style="color: #fff">🤖 Ask your AI Assistant</h3>
-            <div style="color: rgba(255, 255, 255, 0.9); margin-top: 10px">
-              <strong>Try asking:</strong>
-
-              <ul style="margin-top: 10px; padding-left: 20px">
-                <li>Tell me about PetPal</li>
-                <li>Register a new pet</li>
-                <li>When is Bruno's next vaccination?</li>
-                <li>What should I feed my puppy?</li>
-                <li>Explain this dashboard.</li>
-              </ul>
             </div>
-            <button
-              class="btn btn-accent"
-              onclick="document.querySelector('.ai-fab').click()"
-            >
-              Open Assistant
-            </button>
-            <div style="margin-top: 1.5rem">
-              <h4 style="color: #fff; margin-bottom: 0.5rem">
-                Recent Activities
-              </h4>
-              <ul
-                class="activity-list"
-                style="color: rgba(255, 255, 255, 0.85)"
-              >
-                <li style="border-color: rgba(255, 255, 255, 0.15)">
-                  <b style="color: #fff">Bruno</b> — vaccination scheduled · 2h
-                  ago
-                </li>
-                <li style="border-color: rgba(255, 255, 255, 0.15)">
-                  <b style="color: #fff">Kitty</b> — added medical note ·
-                  yesterday
-                </li>
-                <li style="border-color: rgba(255, 255, 255, 0.15)">
-                  <b style="color: #fff">Sector 5</b> — logged feeding ·
-                  yesterday
-                </li>
-              </ul>
+        </div>
+
+        <!-- SECTION B: PREMIUM HOVER RESTRUCTURING VACCINATION LOGS -->
+        <div id="vaccinations-section" class="section-card">
+            <div style="border-bottom: 1px solid #e2e8f0; padding-bottom: 1rem; margin-bottom: 1.5rem;">
+                <h2>💉 Immunization Schedules & Vaccination Records</h2>
+                <p style="color: var(--text-muted); font-size: 0.95rem; margin-top: 0.25rem;">Live verification sheets mapping current booster target timelines.</p>
             </div>
-          </div>
+            <div id="dynamic-vaccine-list" class="vax-container-grid"></div>
         </div>
 
-        <div class="panel">
-  <h3>🐾 My Pets</h3>
-
-  <div id="petList" style="margin-top: 1rem">
-  </div>
-
-  <a
-    href="pet-profile.html"
-    class="btn btn-primary"
-    style="margin-top: 1rem"
-  >
-    + Add Pet
-  </a>
-</div>
-          <div class="panel">
-            <h3>🐕 Stray Care Records</h3>
-            <ul class="activity-list" style="margin-top: 1rem">
-              <li><b>Sector 5 — 4 dogs</b> · Vaccinated · Feed 7:00 PM</li>
-              <li><b>Park Lane — 2 cats</b> · Sterilized · Feed 6:30 PM</li>
-              <li><b>Market Rd — 1 dog</b> · Vaccination pending</li>
-              <li><b>Metro Gate — 3 puppies</b> · Under care</li>
-            </ul>
-          </div>
+        <!-- SECTION C: DYNAMIC OWNED PETS DATA GRID -->
+        <div id="my-pets-section" style="scroll-margin-top: 2rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                <h2 style="color: var(--text-main); font-size: 1.35rem; font-weight: 700; margin: 0;">🐾 Active Registered Pet Profiles</h2>
+                <a href="./pet-profile.html" class="btn-action-primary">+ Add Pet</a>
+            </div>
+            <div id="real-pet-grid-container" class="pet-grid"></div>
         </div>
-      </main>
+
     </div>
 
-    <button class="ai-fab" aria-label="Ask PetPal AI">🤖</button>
-    <div class="ai-panel">
-      <div class="ai-header">
-        <div class="avatar">🤖</div>
-        <div>
-          <strong>PetPal AI</strong><small>Multilingual · Always on</small>
-        </div>
-        <button class="close">×</button>
-      </div>
-      <div class="ai-body">
-        <div class="msg bot">
-          Hi! Ask me about your upcoming reminders or any pet-care
-          question.
-        </div>
-      </div>
-      <div class="ai-suggest">
-        <button>What are my upcoming reminders?</button
-        ><button>When is Bruno's next vaccination?</button
-        ><button>Show today's stray feeding</button>
-      </div>
-      <div class="ai-input">
-        <input type="text" placeholder="Ask PetPal AI…" /><button>Send</button>
-      </div>
+    <!-- IMMERSIVE SECURE TRANSITION DIALOG OVERLAY -->
+    <div id="logout-overlay-screen">
+        <div class="spinner"></div>
+        <h2 style="margin-top: 1.5rem; font-weight: 500; font-size: 1.25rem;">Logging Out Securely...</h2>
+        <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.4rem;">Clearing server credentials and profile state sessions.</p>
     </div>
-    <script src="script.js"></script>
-    <script>
 
-const user = JSON.parse(localStorage.getItem("user"));
-
-if(!user){
-
-    window.location.href="login.html";
-
-}
-
-document.getElementById("welcomeUser").innerHTML =
-"Welcome back, " + user.fullname + " 👋";
-
-fetch("https://petpal-usd4.onrender.com/my_pets/" + user.id)
-
-.then(res=>res.json())
-
-.then(pets=>{
-
-    document.getElementById("petCount").innerHTML=pets.length;
-
-    const petList=document.getElementById("petList");
-
-    petList.innerHTML="";
-
-    pets.forEach(pet=>{
-
-        petList.innerHTML += `
-        <div class="pet-mini">
-
-            <div class="avatar">🐾</div>
-
-            <div>
-
-                <b>${pet.pet_name}</b>
-
-                <div style="color:var(--text-muted);font-size:0.85rem">
-
-                    ${pet.breed} • ${pet.age} yrs • ${pet.weight} kg
-
-                </div>
-
-            </div>
-
-        </div>
-        `;
-
-    });
-
-});
-
-</script>
-<!-- Interactive Full-Screen Logout Animation Layer -->
-<!-- KEEP THIS HTML OVERLAY BLOCK RIGHT HERE -->
-<div id="logout-overlay-screen" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #0f172a; z-index: 99999; justify-content: center; align-items: center; flex-direction: column; color: white; font-family: sans-serif;">
-    <div style="width: 45px; height: 45px; border: 4px solid #38bdf8; border-top: 4px solid transparent; border-radius: 50%; animation: clean-spin 0.8s linear infinite;"></div>
-    <h2 style="margin-top: 1.5rem; font-weight: 500; font-size: 1.3rem;">Logging Out Securely...</h2>
-    <p style="color: #64748b; font-size: 0.95rem; margin-top: 0.4rem;">Wiping profile tokens and data cache context sessions.</p>
-</div>
-<style>@keyframes clean-spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }</style>
-
-<!-- PLACE YOUR COMPLETE CORRECTED SCRIPT BLOCK IMMEDIATELY BELOW THE OVERLAY -->
-<script>
-  document.addEventListener("DOMContentLoaded", async () => {
-    // 1. Get logged-in user state data securely from browser local storage context
-    const userString = localStorage.getItem("user");
-    if (!userString) {
-      window.location.href = "./login.html";
-      return;
-    }
-    const user = JSON.parse(userString);
-    
-    // 2. Banish Fake Title: Update user welcome presentation string dynamically
-    const welcomeHeading = document.querySelector(".welcome-msg h1") || document.querySelector("h1");
-    if (welcomeHeading) {
-      welcomeHeading.textContent = `Welcome Back, ${user.fullname || 'Pet Owner'}!`;
-    }
-
-    try {
-      // 3. FIXED: Pointing directly to your real dynamic /my_pets route string
-      const response = await fetch(`https://petpal-usd4.onrender.com/my_pets/${user.id}`);
-      const pets = await response.json();
-
-      // Target your counter elements and grid layout container nodes cleanly
-      const petContainer = document.querySelector("#my-pets-grid") || document.querySelector(".pets-list") || document.querySelector(".my-pets-section");
-      const petCountBadge = document.querySelector("[data-counter='pet_count']") || document.querySelector(".stats-card h3");
-      const activityList = document.querySelector(".recent-activities-container") || document.querySelector(".activity-feed");
-
-      // 4. Banish Fake Counter Badge: Display actual length metrics array count from Supabase
-      if (petCountBadge && Array.isArray(pets)) {
-        petCountBadge.textContent = pets.length;
-      }
-
-      // 5. Banish Fake Cards & Activities List: Dynamically insert real database rows
-      if (petContainer && Array.isArray(pets)) {
-        // Wipe out fake placeholder items cleanly
-        petContainer.innerHTML = "";
-        if (activityList) activityList.innerHTML = "";
-
-        if (pets.length === 0) {
-          petContainer.innerHTML = `<p class="empty-state" style="padding:1rem; color:#64748b;">No registered pets found. Click '+ Add Pet' to initialize your database tracking profiles!</p>`;
-          if (activityList) {
-            activityList.innerHTML = `<div class="activity-item" style="color:#0f172a !important; font-weight:600; padding:0.5rem 1rem;">No recent activities found for your profile tier.</div>`;
-          }
-          return;
-        }
-
-        // Loop through real database entries dynamically to build the live grid list
-        pets.forEach((pet, index) => {
-          // Append live pet card component
-          const card = document.createElement("div");
-          card.className = "pet-card card reveal in";
-          card.style.cssText = "margin:1rem 0; padding:1.5rem; background:white; border-radius:12px; box-shadow:0 4px 6px rgba(0,0,0,0.05); border:1px solid #e2e8f0;";
-          card.innerHTML = `
-            <h3 style="color:#0f172a; margin-bottom:0.5rem; font-weight:600;">${pet.pet_name} <span style="font-size:0.9rem; color:#64748b; font-weight:400;">(${pet.pet_type})</span></h3>
-            <p style="color:#334155; font-size:0.95rem; margin:0.2rem 0;"><strong>Breed:</strong> ${pet.breed} | <strong>Gender:</strong> ${pet.gender}</p>
-            <p style="color:#334155; font-size:0.95rem; margin:0.2rem 0;"><strong>Weight:</strong> ${pet.weight} kg | <strong>Age:</strong> ${pet.age} years old</p>
-            <div style="display:inline-block; background:#e0f2fe; color:#0369a1; padding:0.25rem 0.6rem; border-radius:6px; font-size:0.85rem; font-weight:600; margin-top:0.5rem;">Next Vaccine: ${pet.next_vaccination_date || 'Not Scheduled'}</div>
-            <p style="color:#64748b; font-size:0.9rem; margin-top:0.5rem; font-style:italic;">Notes: ${pet.medical_notes || 'No custom conditions logged.'}</p>
-          `;
-          petContainer.appendChild(card);
-
-          // Append real-time corresponding activity log entry in crisp high-contrast dark color text
-          if (activityList) {
-            const activityItem = document.createElement("div");
-            activityItem.className = "activity-item";
-            activityItem.style.cssText = "color:#0f172a !important; font-weight:600; padding:0.75rem 1rem; border-bottom:1px solid #f1f5f9; display:flex; justify-content:space-between; align-items:center;";
-            activityItem.innerHTML = `
-              <span>🐾 ${pet.pet_name} — active tracking profile loaded successfully</span>
-              <span style="font-size:0.85rem; color:#475569; font-weight:500;">Just Now</span>
-            `;
-            activityList.appendChild(activityItem);
-          }
-        });
-      }
-    } catch (error) {
-      console.error("Database pipeline failed to map incoming user pets context:", error);
-    }
-  });
-
-  /* ---------- Professional Interactive Logout Process ---------- */
-  const logoutBtn = document.querySelector("#logout-btn-trigger");
-  if (logoutBtn) {
-    logoutBtn.addEventListener("click", (e) => {
-      e.preventDefault();
-      const overlay = document.querySelector("#logout-overlay-screen");
-      if (overlay) overlay.style.display = "flex";
-      
-      setTimeout(() => {
-        localStorage.removeItem("user");
-        window.location.href = "./login.html";
-      }, 2000);
-    });
-  }
-</script>
-  </body>
+    <script src="dashboard-sync.js"></script>
+</body>
 </html>

@@ -1,0 +1,359 @@
+/* ==========================================================================
+   DASHBOARD & COMMUNITY PORTAL SPECIFIC ISOLATED STYLING ENGINE
+   ========================================================================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --brand-primary: #2563eb;
+    --brand-primary-hover: #1d4ed8;
+    --brand-secondary: #0ea5e9;
+    --bg-canvas: #f8fafc;
+    --bg-card: #ffffff;
+    --text-main: #0f172a;
+    --text-muted: #64748b;
+    --border-color: #e2e8f0;
+    --success-color: #10b981;
+    --danger-color: #ef4444;
+    --sidebar-width: 260px;
+}
+
+body {
+    background-color: var(--bg-canvas);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    color: var(--text-main);
+    display: flex;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    margin: 0;
+}
+
+/* ----------------------------------------------------
+   STANDING NAVIGATION SIDEBAR (LEFT COLUMN ALIGNMENT)
+   ---------------------------------------------------- */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: var(--sidebar-width);
+    height: 100vh;
+    background-color: var(--bg-card);
+    border-right: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem 0;
+    z-index: 100;
+}
+
+.logo-section {
+    padding: 0 1.5rem 1.5rem 1.5rem;
+    border-bottom: 1px solid #f1f5f9;
+    margin-bottom: 1rem;
+}
+
+.logo-section h2 {
+    font-size: 1.35rem;
+    color: var(--brand-primary);
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.nav-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    width: 100%;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.section-title {
+    padding: 0.75rem 1.5rem 0.25rem 1.5rem;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.75px;
+}
+
+.sidebar-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0.75rem 1.5rem;
+    color: #334155;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    border-radius: 8px;
+    margin: 0 0.75rem;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+}
+
+.sidebar-item:hover, .sidebar-item.active {
+    background-color: #f1f5f9;
+    color: var(--text-main);
+    font-weight: 600;
+}
+
+/* ----------------------------------------------------
+   MAIN CORE CONTENT AREA GRAPHICS
+   ---------------------------------------------------- */
+.main-content {
+    margin-left: var(--sidebar-width);
+    padding: 3rem;
+    width: calc(100% - var(--sidebar-width));
+    min-height: 100vh;
+}
+
+.welcome-msg h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-main);
+    letter-spacing: -0.75px;
+}
+
+.welcome-msg p {
+    color: var(--text-muted);
+    font-size: 1rem;
+    margin-top: 0.25rem;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+    margin: 2.5rem 0;
+}
+
+.stats-card {
+    background: var(--bg-card);
+    padding: 1.75rem;
+    border-radius: 16px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 6px -1px rgba(15,23,42,0.01);
+}
+
+.stats-card h4 {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.stats-card h3 {
+    color: var(--text-main);
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+/* ----------------------------------------------------
+   DYNAMIC CARDS & REAL-TIME PET CARD ELEMENTS
+   ---------------------------------------------------- */
+.section-card {
+    background: var(--bg-card);
+    padding: 2.5rem;
+    border-radius: 16px;
+    border: 1px solid var(--border-color);
+    margin-bottom: 2.5rem;
+    box-shadow: 0 10px 15px -3px rgba(15,23,42,0.02);
+}
+
+.section-card h2 {
+    color: var(--text-main);
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.3px;
+}
+
+.pet-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.pet-card {
+    padding: 1.75rem;
+    background: #ffffff;
+    border-radius: 14px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.01);
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.pet-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 20px -5px rgba(15,23,42,0.05);
+    border-color: #cbd5e1;
+}
+
+.pet-card h3 {
+    color: var(--text-main);
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.pet-card p {
+    color: #475569;
+    font-size: 0.95rem;
+    margin: 0.35rem 0;
+    line-height: 1.5;
+}
+
+.btn-action-primary {
+    background: var(--brand-primary);
+    color: white;
+    text-decoration: none;
+    padding: 0.65rem 1.35rem;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+}
+
+.btn-action-primary:hover {
+    background: var(--brand-primary-hover);
+    transform: translateY(-1px);
+}
+
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    background: #ecfdf5;
+    color: #047857;
+    margin-top: 0.5rem;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--success-color);
+    display: inline-block;
+}
+
+/* ----------------------------------------------------
+   PREMIUM HOVER-ENABLED VACCINATION RESTRUCTURING
+   ---------------------------------------------------- */
+.vax-container-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.vax-record-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    padding: 2rem;
+    box-shadow: 0 4px 6px -1px rgba(15, 23, 42, 0.02);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.vax-record-card:hover {
+    transform: translateY(-3px) scale(1.01);
+    box-shadow: 0 12px 25px -5px rgba(37, 99, 235, 0.08), 0 8px 10px -6px rgba(37, 99, 235, 0.04);
+    border-color: #bfdbfe;
+    background: linear-gradient(to right, #ffffff, #f8fafc);
+}
+
+.vax-record-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 5px;
+    height: 100%;
+    background: #cbd5e1;
+    transition: background 0.3s ease;
+}
+
+.vax-record-card:hover::before {
+    background: #2563eb;
+}
+
+.vax-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+}
+
+.vax-card-header h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #0f172a;
+}
+
+.vax-badge-pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.4rem 0.85rem;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.vax-badge-next { background: #e0f2fe; color: #0369a1; }
+.vax-badge-prev { background: #f1f5f9; color: #475569; margin-right: 0.5rem; }
+.vax-meta-row { color: #475569; font-size: 0.95rem; margin: 0.35rem 0; line-height: 1.5; }
+.vax-notes-line { color: #64748b; font-size: 0.9rem; margin-top: 0.75rem; font-style: italic; padding-top: 0.75rem; border-top: 1px dashed #e2e8f0; }
+
+/* ----------------------------------------------------
+   IMMERSIVE INTERACTIVE SECURE LOGOUT OVERLAY
+   ---------------------------------------------------- */
+#logout-overlay-screen {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #0f172a;
+    z-index: 99999;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: white;
+}
+
+.spinner {
+    width: 44px;
+    height: 44px;
+    border: 4px solid #38bdf8;
+    border-top: 4px solid transparent;
+    border-radius: 50%;
+    animation: clean-spin 0.8s linear infinite;
+}
+@keyframes clean-spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+/* ----------------------------------------------------
+   COMMUNITY GRID MATRIX CARDS SPECIFICS
+   ---------------------------------------------------- */
+.app-container { max-width: 1200px; margin: 0 auto; padding: 3rem 1.5rem; }
+.top-nav-bar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 3.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--border-color); }
+.nav-back-link { display: inline-flex; align-items: center; gap: 8px; color: var(--brand-primary); text-decoration: none; font-weight: 600; font-size: 0.95rem; padding: 0.5rem 1rem; background: #eff6ff; border-radius: 8px; transition: transform 0.2s ease; }
+.nav-back-link:hover { background: #dbeafe; transform: translateX(-3px); }
+.grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(500px, 1fr)); gap: 2rem; }
+@media (max-width: 768px) { .grid-container { grid-template-columns: 1fr; } }
+.section-card-alt { background: #ffffff; padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border-color); box-shadow: 0 4px 6px -1px rgba(15,23,42,0.02); scroll-margin-top: 2rem; position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; transition: all 0.25s ease; }
+.section-card-alt:hover { transform: translateY(-4px); box-shadow: 0 20px 25px -5px rgba(15,23,42,0.05); border-color: #cbd5e1; }

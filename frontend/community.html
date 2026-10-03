@@ -4,245 +4,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PetPal — Community Workspace Hub</title>
-    <link rel="stylesheet" href="style.css">
-    <!-- Premium Google Fonts Link -->
+    <link rel="stylesheet" href="dashboard-style.css">
     <link href="https://googleapis.com" rel="stylesheet">
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-        body {
-            background-color: #f8fafc;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            color: #0f172a;
-            -webkit-font-smoothing: antialiased;
-        }
-        .app-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 3rem 1.5rem;
-        }
-        /* Top Navigation Header Styling */
-        .top-nav-bar {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 3.5rem;
-            padding-bottom: 1.5rem;
-            border-bottom: 1px solid #e2e8f0;
-        }
-        .nav-back-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            color: #2563eb;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.95rem;
-            padding: 0.5rem 1rem;
-            background: #eff6ff;
-            border-radius: 8px;
-            transition: all 0.2s ease;
-        }
-        .nav-back-link:hover {
-            background: #dbeafe;
-            transform: translateX(-3px);
-        }
-        .page-title h1 {
-            font-size: 1.75rem;
-            font-weight: 700;
-            color: #0f172a;
-            letter-spacing: -0.5px;
-        }
-        .page-title p {
-            color: #64748b;
-            font-size: 0.95rem;
-            margin-top: 0.25rem;
-        }
-        /* Premium Responsive Cards Grid Layout */
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
-            gap: 2rem;
-        }
-        @media (max-width: 768px) {
-            .grid-container {
-                grid-template-columns: 1fr;
-            }
-        }
-        .section-card {
-            background: #ffffff;
-            padding: 2.5rem;
-            border-radius: 16px;
-            border: 1px solid #e2e8f0;
-            box-shadow: 0 4px 6px -1px rgba(15, 23, 42, 0.02), 0 2px 4px -1px rgba(15, 23, 42, 0.01);
-            scroll-margin-top: 2rem;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-        .section-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 4px;
-            height: 100%;
-            background: transparent;
-            transition: background 0.2s ease;
-        }
-        /* Dynamic Theme Accents per Card Block */
-        #adoption:hover::before { background: #10b981; }
-        #stray-care:hover::before { background: #f59e0b; }
-        #feeding:hover::before { background: #3b82f6; }
-        #settings:hover::before { background: #64748b; }
-
-        .section-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 20px 25px -5px rgba(15, 23, 42, 0.06), 0 10px 10px -5px rgba(15, 23, 42, 0.03);
-            border-color: #cbd5e1;
-        }
-        .card-header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 1rem;
-        }
-        .card-icon {
-            font-size: 1.75rem;
-        }
-        .section-card h2 {
-            color: #0f172a;
-            font-size: 1.35rem;
-            font-weight: 600;
-            letter-spacing: -0.3px;
-        }
-        .section-card p {
-            color: #475569;
-            line-height: 1.6;
-            font-size: 0.95rem;
-            margin-bottom: 1.75rem;
-        }
-        /* Neon Micro Status Badges Layout */
-        .status-badge-container {
-            display: flex;
-            align-items: center;
-        }
-        .status-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 0.4rem 0.85rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            letter-spacing: 0.2px;
-        }
-        .dot {
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            display: inline-block;
-        }
-        /* Dynamic Badge Color Injection Blocks */
-        .badge-success { background: #ecfdf5; color: #047857; }
-        .badge-success .dot { background: #10b981; animation: pulse 2s infinite; }
-        
-        .badge-warning { background: #fffbeb; color: #b45309; }
-        .badge-warning .dot { background: #f59e0b; }
-        
-        .badge-info { background: #f0fdfa; color: #0f766e; }
-        .badge-info .dot { background: #14b8a6; }
-        
-        .badge-secure { background: #f8fafc; color: #475569; border: 1px solid #e2e8f0; }
-        .badge-secure .dot { background: #64748b; }
-
-        @keyframes pulse {
-            0% { transform: scale(0.95); opacity: 0.5; }
-            50% { transform: scale(1.15); opacity: 1; }
-            100% { transform: scale(0.95); opacity: 0.5; }
-        }
-    </style>
 </head>
 <body>
 
     <div class="app-container">
-        <!-- TOP APP BAR -->
+        <!-- GLOBAL APP RETURNING LINE BAR -->
         <header class="top-nav-bar">
-            <a href="./dashboard.html" class="nav-back-link">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
-                Dashboard Overview
-            </a>
-            <div class="page-title" style="text-align: right;">
-                <h1>Community Hub</h1>
-                <p>Social utilities and workspace portals</p>
+            <a href="./dashboard.html" class="nav-back-link">← Dashboard Overview</a>
+            <div style="text-align: right;">
+                <h1 style="font-size: 1.6rem; font-weight: 700; letter-spacing: -0.5px;">Community Modules</h1>
+                <p style="color: #64748b; font-size: 0.9rem; margin-top: 0.25rem;">Social workspace systems and profile controls</p>
             </div>
         </header>
         
-        <!-- MAIN SECTION MATRIX GRID -->
+        <!-- CARDS COLUMNS GRIDS MATRIX -->
         <main class="grid-container">
             
-            <!-- SECTION 1: ADOPTION HUB -->
-            <section id="adoption" class="section-card">
+            <section id="adoption" class="section-card-alt">
                 <div>
-                    <div class="card-header">
-                        <span class="card-icon">🏡</span>
-                        <h2>Adoption Center</h2>
-                    </div>
+                    <div style="display:flex; align-items:center; gap:10px; margin-bottom:1rem;"><h2>🏡 Adoption Center</h2></div>
                     <p>Browse available pet profiles looking for a permanent loving family, or submit a rescued animal listing to track adoption applicants globally.</p>
                 </div>
-                <div class="status-badge-container">
-                    <span class="status-badge badge-success"><span class="dot"></span>Live Database Sync Connected</span>
-                </div>
+                <div><span class="status-badge"><span class="dot"></span>Live Database Active</span></div>
             </section>
 
-            <!-- SECTION 2: STRAY CARE MODULE -->
-            <section id="stray-care" class="section-card">
+            <section id="stray-care" class="section-card-alt">
                 <div>
-                    <div class="card-header">
-                        <span class="card-icon">🐕</span>
-                        <h2>Stray Care Portal</h2>
-                    </div>
+                    <div style="display:flex; align-items:center; gap:10px; margin-bottom:1rem;"><h2>🐕 Stray Care Portal</h2></div>
                     <p>Log stray animal sightings, coordinate neighborhood rescue efforts, map localized feeder groups, and report injured strays across active municipal sectors.</p>
                 </div>
-                <div class="status-badge-container">
-                    <span class="status-badge badge-warning"><span class="dot"></span>Location Tracking Active</span>
-                </div>
+                <div><span class="status-badge" style="background:#fffbeb; color:#b45309;"><span class="dot" style="background:#f59e0b;"></span>Tracking Sync Operational</span></div>
             </section>
 
-            <!-- SECTION 3: FEEDING TRACKER -->
-            <section id="feeding" class="section-card">
+            <section id="feeding" class="section-card-alt">
                 <div>
-                    <div class="card-header">
-                        <span class="card-icon">🍽️</span>
-                        <h2>Feeding Schedules</h2>
-                    </div>
+                    <div style="display:flex; align-items:center; gap:10px; margin-bottom:1rem;"><h2>🍽️ Feeding Schedules</h2></div>
                     <p>Log dietary intake records, balance daily nutritional weight ratios, set up automated alarms, and coordinate community feeding station logs.</p>
                 </div>
-                <div class="status-badge-container">
-                    <span class="status-badge badge-info"><span class="dot"></span>Logging Matrix Functional</span>
-                </div>
+                <div><span class="status-badge" style="background:#f0fdfa; color:#0f766e;"><span class="dot" style="background:#14b8a6;"></span>Matrix Active</span></div>
             </section>
 
-            <!-- SECTION 4: ACCOUNT SETTINGS -->
-            <section id="settings" class="section-card">
+            <section id="settings" class="section-card-alt">
                 <div>
-                    <div class="card-header">
-                        <span class="card-icon">⚙️</span>
-                        <h2>System Profile Settings</h2>
-                    </div>
+                    <div style="display:flex; align-items:center; gap:10px; margin-bottom:1rem;"><h2>⚙️ System Profile Settings</h2></div>
                     <p>Modify your account full name parameters, set notification delivery triggers, synchronize active contact email addresses, and reset secure passwords.</p>
                 </div>
-                <div class="status-badge-container">
-                    <span class="status-badge badge-secure"><span class="dot"></span>Fully Secured Platform</span>
-                </div>
+                <div><span class="status-badge" style="background:#f8fafc; color:#475569; border:1px solid var(--border-color);"><span class="dot" style="background:#64748b;"></span>Fully Secured Layer</span></div>
             </section>
-
+            
         </main>
     </div>
 
