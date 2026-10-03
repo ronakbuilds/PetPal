@@ -563,3 +563,48 @@ body {
     max-width: 1200px;
     margin: 0 auto !important;
 }
+
+/* ==========================================================================
+   LANDING PAGE NAVBAR ALIGNMENT & BUTTON RECTANGLE GEOMETRY OVERRIDES
+   ========================================================================== */
+
+/* 1. Shifting navbar links and buttons to the right side with spacing */
+.navbar, .app-header-bar {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 1rem 3rem !important;
+}
+
+/* Pushes the link group menu smoothly towards the right elements cluster */
+.navbar .nav-links, .horizontal-nav-links {
+    margin-left: auto !important; /* Pushes everything to the right side */
+    margin-right: 3rem !important; /* Leaves a crisp margin block before buttons */
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 2.25rem !important; /* Extra balanced clean space in between each option link */
+}
+
+/* 2. Selecting the right-side button group container elements */
+.navbar-buttons, .auth-buttons-group {
+    display: flex !important;
+    align-items: center !important;
+    gap: 1.5rem !important; /* Perfect space in between Login and Get Started buttons */
+}
+
+/* 3. Upgrading Get Started button geometry to a professional semi-rectangle shape */
+.navbar .btn-get-started, 
+.navbar .primary-btn, 
+.navbar a[href*="register"],
+.navbar button:contains("Get Started") {
+    border-radius: 8px !important; /* Reduced from 50% circle down to a modern semi-rectangle pill */
+    padding: 0.75rem 1.75rem !important; /* Clean structured padding layout proportions */
+    font-weight: 700 !important;
+    white-space: nowrap !important;
+    height: auto !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
